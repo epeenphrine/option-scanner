@@ -39,13 +39,26 @@ def options_arbitrage():
         arbRatio = request.args.get('arbRatio', .5, type =float)
         ticker = request.args.get('ticker', None, type=str) 
     pass
-@app.route('/api/sp500/options/rawData', methods=['GEt'])
+@app.route('/api/sp500/options/rawData', methods=['GET'])
 def rawData():
     if request.method == "GET":
         with open('callie_scripts/option_chains_list.json', 'r') as f:
             jsonObject = json.load(f)
         return jsonify(jsonObject)
 
+@app.route('/ipo/thisWeek', methods=['GET'])
+def ipoThisWeek():
+    if request.method == "GET":
+        with open("scrapers/json/this_week.json", "r") as f:
+            jsonObject = json.load(f)
+        return jsonify(jsonObject)
+
+@app.route('/ipo/nextWeek', methods=['GET'])
+def ipoNextWeek():
+    if request.method == "GET":
+        with open("scrapers/json/next_week.json", "r") as f:
+            jsonObject = json.load(f)
+        return jsonify(jsonObject)
 #@app.route('/api/makeTdaRequest', methods=['GEt', 'POST'])
 #def makeTdaRequest():
     #if request.method =='GET':

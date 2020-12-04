@@ -68,10 +68,26 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             pass
 
 @client.command()
-async def callietesting(ctx, *arg): # <--- *arg stores arguments as tuples. Check print statements to see how it works
-    res = requests.get(f"")
-    pass
-
+async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print statements to see how it works
+    if arg:
+        if arg[0] == "next":
+            message = ""
+            res = requests.get("https://api.neetcode.com/ipo/nextWeek").json()
+            for company in res:
+                message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
+            message_2 = await ctx.send(message)
+            await asyncio.sleep(120)
+            await ctx.message.delete()
+            await discord.Message.delete(message_2)
+    if not arg:
+        message = ""
+        res = requests.get("https://api.neetcode.com/ipo/thisWeek").json()
+        for company in res:
+            message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
+        message_2 = await ctx.send(message)
+        await asyncio.sleep(120)
+        await ctx.message.delete()
+        await discord.Message.delete(message_2)
 # async tasks
 # prod
 client.run(prod)
