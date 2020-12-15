@@ -88,6 +88,23 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
         await asyncio.sleep(120)
         await ctx.message.delete()
         await discord.Message.delete(message_2)
+
+@client.command()
+async def trend(ctx,*arg):
+    print('in trend')
+    message = "**stocktwats most popular to least popular**\n"
+    res = requests.get("https://api.stocktwits.com/api/2/trending/symbols.json").json()['symbols']
+    count = 0
+    for company in res:
+        message += f"**{company['symbol']} **/ {company['title']} / watchlist_count : {company['watchlist_count']} \n"
+        count += 1
+        if count == 15: 
+            break
+    message_2= await ctx.send(message)
+    await asyncio.sleep(120)
+    await ctx.message.delete()
+    await discord.Message.delete(message_2)
+
 # async tasks
 # prod
 client.run(prod)

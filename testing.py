@@ -28,6 +28,7 @@ payload = {
     "range": "OTM",
     "strategy": "SINGLE"
 }
+
 res = requests.get(url, params=payload).json()
 print(res)
 
@@ -41,6 +42,23 @@ payload= {
 res = requests.get(url, params=payload).content
 print(res)
 
-#%%
-from callie_scripts.make_options_req import MakeRequest
+#%% tda api request manual test
+from option_scripts.get_options_from_tda import MakeRequest
 start = MakeRequest
+
+#%% earnings test
+from option_scripts.get_earnings_date_from_yahoo import get_earnings
+get_earnings()
+
+#%% script tests
+from option_scripts.filter_json import get_callies
+
+days = 20
+goldenRatio = .6
+totalVolume = 200
+openInterest = 200 
+
+something = get_callies(date_delta=days,
+            goldenRatio=goldenRatio,
+            totalVolume=totalVolume, 
+            openInterest=openInterest,)
