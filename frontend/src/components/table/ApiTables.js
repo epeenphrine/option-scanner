@@ -26,17 +26,31 @@ export default function ApiTables() {
     console.log(url);
     setApi(data);
   }
-  const tickers = api.map((something) => <li>{something.ticker}</li>);
-  const rows = api.map((row) => (
-    <tr>
-      <th scope="row">{row.ticker}</th>
-      <th scope="row">{row.underlyingPrice}</th>
-      <td>{row.dates.join(" / \t")}</td>
-      <td>{row.strikes.join(" / \t")}</td>
-      <td>{row.goldenRatio.join(" / \t")}</td>
-      <td>{row.prices.join(" / \t")}</td>
-    </tr>
-  ));
+
+  // const tickers = api.map((something) => <li>{something.ticker}</li>);
+  let rows;
+  if (Array.isArray(api)){
+    rows = api.map((row) => (
+      <tr>
+        <th scope="row">{row.ticker}</th>
+        <th scope="row">{row.underlyingPrice}</th>
+        <td>{row.dates.join(" / \t")}</td>
+        <td>{row.strikes.join(" / \t")}</td>
+        <td>{row.goldenRatio.join(" / \t")}</td>
+        <td>{row.prices.join(" / \t")}</td>
+      </tr>
+    ));
+  }
+  // const rows = api.map((row) => (
+  //   <tr>
+  //     <th scope="row">{row.ticker}</th>
+  //     <th scope="row">{row.underlyingPrice}</th>
+  //     <td>{row.dates.join(" / \t")}</td>
+  //     <td>{row.strikes.join(" / \t")}</td>
+  //     <td>{row.goldenRatio.join(" / \t")}</td>
+  //     <td>{row.prices.join(" / \t")}</td>
+  //   </tr>
+  // ));
   // console.log(goldenRatio)
   // console.log(volume)
   // console.log(oi)
