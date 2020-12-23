@@ -15,12 +15,10 @@ services:
     image: "flask_api"
     build:
       context: flask_api 
-      dockerfile: flask.Dockerfile
-    ports:
-      - 5000:5000
-    volumes: 
-      - /tmp/json:/tmp/json ## memory to save wear
+      dockerfile: flask.dev.Dockerfile
     restart: unless-stopped
+    ports:
+      - 5001:5001
 
   tda_script: 
     container_name: tda_script 
@@ -31,3 +29,12 @@ services:
     volumes: 
       - /tmp/json:/tmp/json ## memory to save wear
       - ./tokens:/app/tokens
+
+  option_scanner_frontend:
+    container_name: option_scanner_frontend 
+    image: "option_scanner_frontend"
+    build:
+      context: frontend 
+      dockerfile: dev.Dockerfile
+    volumes: 
+      - ./frontend:/app

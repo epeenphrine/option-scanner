@@ -3,7 +3,7 @@
 import datetime
 from pytz import timezone
 import time
-from yahoo_earnings_calendar import YahooEarningsCalendar
+# from yahoo_earnings_calendar import YahooEarningsCalendar
 import csv
 from datetime import date
 from config import client_id, redirect_uri, date_delta
@@ -16,8 +16,8 @@ import requests
 class MakeRequest:
     '''make request to tda and then save as json'''
     date_delta = 60 
-    json_file_path_test = 'optionChainsList.json'
-    json_file_path = 'option_scripts/optionChainsList.json'
+    json_file_path_test = '/tmp/json/optionChainsList.json'
+    json_file_path = '/tmp/json/optionChainsList.json'
     def get_front_date(date_delta):
         '''get nearest friday from date delta'''
         dates_list = []
@@ -92,7 +92,8 @@ class MakeRequest:
 
         print(option_chains)
         option_chains_list.append(option_chains)
-
+        # with open(json_file_path, 'w') as f:
+        #     json.dump(option_chains, f)
     # with open('callie_scripts/option_chains_list.json', 'w') as f:
     #     json.dump(option_chains_list, f)
 
@@ -106,5 +107,3 @@ class MakeRequest:
     print('script finished check option_scripts directory for json files')
     with open(json_file_path, 'w') as f:
         json.dump(option_chains_dict, f)
-
-    

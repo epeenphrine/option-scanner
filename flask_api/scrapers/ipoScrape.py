@@ -3,6 +3,9 @@ import requests
 import random
 import pandas as pd
 import json
+
+
+filt_path = "/tmp/json"
 def start_scrape():
     '''
     scrapes and then saves as json
@@ -34,7 +37,7 @@ def start_scrape():
     this_week_dict = this_week.to_dict('records')
     next_week_dict = next_week.to_dict('records')
 
-    with open('scrapers/json/this_week.json', 'w') as f:
+    with open('/tmp/this_week.json', 'w') as f:
         json.dump(this_week_dict, f)
-    with open('scrapers/json/next_week.json', 'w') as f:
+    with open('/tmp/next_week.json', 'w') as f:
         json.dump(next_week_dict, f)

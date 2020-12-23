@@ -5,6 +5,9 @@
 import json
 import datetime
 
+json_file_path_test = '/tmp/optionChainsList.json'
+json_file_path = '/tmp/option_scripts/optionChainsList.json'
+
 def get_front_date(date_delta):
         dates_list = []
         for i in range(0, date_delta):
