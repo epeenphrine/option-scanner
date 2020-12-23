@@ -38,7 +38,7 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             goldenRatio = arg[1]
             totalVolume = arg[2] 
             openInterest = arg[3]
-            res = requests.get(f"http://192.168.2.10:5000/api/callieSpreads?days={days}&goldenRatio={goldenRatio}&totalVolume={totalVolume}&openInterest={openInterest}").json()
+            res = requests.get(f"http://192.168.2.10:5000/callieSpreads?days={days}&goldenRatio={goldenRatio}&totalVolume={totalVolume}&openInterest={openInterest}").json()
             for company in res:
                 message += f"**__{company['ticker']}__** \n{company['dates']} \n"
                 for i in range(0, len(company['strikes'])):
@@ -54,7 +54,7 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
         if arg[0] and re.match("\d\d", arg[0]) and len(arg) == 1:
             message = ""
             days = arg[0]
-            res = requests.get(f'http://192.168.2.10:5000/api/callieSpreads?days={days}').json()
+            res = requests.get(f'http://192.168.2.10:5000/callieSpreads?days={days}').json()
             print(arg[0])
             print(res)
             for company in res:

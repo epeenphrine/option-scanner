@@ -13,7 +13,7 @@ def hello_world():
     return "home"
 
 #example : yourip:5000/api/callieSpreads?days=20&goldenRatio=.7&volume=50
-@app.route('/api/callieSpreads', methods=['GET', 'POST'])
+@app.route('/callieSpreads', methods=['GET', 'POST'])
 def callie_spreads():
     if request.method == 'POST':
         print('in post ')
@@ -32,13 +32,13 @@ def callie_spreads():
         data = option_filter
         return jsonify(data) 
 
-@app.route('/api/optionsArbitrage', methods=['GET', 'POST'])
+@app.route('/optionsArbitrage', methods=['GET', 'POST'])
 def options_arbitrage():
     if request.method == "POST":
         arbRatio = request.args.get('arbRatio', .5, type =float)
         ticker = request.args.get('ticker', None, type=str) 
     pass
-@app.route('/api/sp500/options/rawData', methods=['GET'])
+@app.route('/sp500/options/rawData', methods=['GET'])
 def rawData():
     if request.method == "GET":
         with open('callie_scripts/option_chains_list.json', 'r') as f:
