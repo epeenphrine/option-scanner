@@ -63,4 +63,3 @@ something = get_callies(date_delta=days,
             totalVolume=totalVolume, 
             openInterest=openInterest,)
 print('testing for trigger')
-print('testing again for trigger')
