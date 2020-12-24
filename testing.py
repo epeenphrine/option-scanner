@@ -62,4 +62,3 @@ something = get_callies(date_delta=days,
             goldenRatio=goldenRatio,
             totalVolume=totalVolume, 
             openInterest=openInterest,)
-print('testing for trigger')
