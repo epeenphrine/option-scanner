@@ -110,7 +110,10 @@ async def trend(ctx,*arg):
 async def pfp(ctx, member: Member = None):
     if not member: 
         member = ctx.author
-    await ctx.send(member.avatar_url)
+    message = await ctx.send(member.avatar_url)
+    await asyncio.sleep(30)
+    await ctx.message.delete()
+    await discord.Message.delete(message)
 
 # async tasks
 # prod
