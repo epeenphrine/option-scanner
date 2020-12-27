@@ -1,4 +1,5 @@
 from discord.ext import commands, tasks
+from discord import Member
 import discord
 import re
 import json 
@@ -104,6 +105,12 @@ async def trend(ctx,*arg):
     await asyncio.sleep(120)
     await ctx.message.delete()
     await discord.Message.delete(message_2)
+
+@client.command()
+async def pfp(ctx, member: Member = None):
+    if not member: 
+        member = ctx.author
+    await ctx.send(member.avatar_url)
 
 # async tasks
 # prod
