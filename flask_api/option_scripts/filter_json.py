@@ -41,7 +41,7 @@ def get_callies(**data): ## pass in multiple paramters
     totalVolume = data['totalVolume']
     openInterest = data['openInterest']
     print(data)
-    with open('option_scripts/optionChainsList.json') as f:
+    with open(json_file_path) as f:
         option_chains_list = json.load(f)['optionChainsList']
     # print(option_chains_list)
     option_dates = list(option_chains_list[0]['callExpDateMap'].keys())
