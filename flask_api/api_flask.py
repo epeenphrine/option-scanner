@@ -55,7 +55,7 @@ def ipoThisWeek():
 @app.route('/ipo/nextWeek', methods=['GET'])
 def ipoNextWeek():
     if request.method == "GET":
-        with open("/tmp/json/json/next_week.json", "r") as f:
+        with open("/tmp/json/next_week.json", "r") as f:
             jsonObject = json.load(f)
         return jsonify(jsonObject)
 
