@@ -31,3 +31,12 @@ services:
     volumes: 
       - /tmp/json:/tmp/json ## memory to save wear
       - ./tokens:/app/tokens
+
+  ipo_scrape:
+    container_name: ipo_scrape 
+    image: "ipo_scrape"
+    build:
+      context: flask_api
+      dockerfile: ipo_scrape.Dockerfile
+    volumes:
+      - /tmp/json:/tmp/json 

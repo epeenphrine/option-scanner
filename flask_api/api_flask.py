@@ -48,14 +48,14 @@ def rawData():
 @app.route('/ipo/thisWeek', methods=['GET'])
 def ipoThisWeek():
     if request.method == "GET":
-        with open("scrapers/json/this_week.json", "r") as f:
+        with open("/tmp/json/this_week.json", "r") as f:
             jsonObject = json.load(f)
         return jsonify(jsonObject)
 
 @app.route('/ipo/nextWeek', methods=['GET'])
 def ipoNextWeek():
     if request.method == "GET":
-        with open("scrapers/json/next_week.json", "r") as f:
+        with open("/tmp/json/json/next_week.json", "r") as f:
             jsonObject = json.load(f)
         return jsonify(jsonObject)
 
