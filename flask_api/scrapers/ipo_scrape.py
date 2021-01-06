@@ -36,5 +36,6 @@ next_week_dict = next_week.to_dict('records')
 
 with open('/tmp/json/this_week.json', 'w') as f:
     json.dump(this_week_dict, f)
+
 with open('/tmp/json/next_week.json', 'w') as f:
     json.dump(next_week_dict, f)
