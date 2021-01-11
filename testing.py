@@ -34,7 +34,7 @@ print(res)
 
 #%% get watch list
 import requests 
-from config import client_id, tda_account_num
+from tokens.config import client_id, tda_account_num
 url = f"https://api.tdameritrade.com/v1/accounts/{tda_account_num}/watchlists"
 payload= {
     "apikey": client_id

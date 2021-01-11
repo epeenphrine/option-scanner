@@ -11,7 +11,7 @@ import os
 import datetime
 
 # local import 
-from config import dev, prod
+from tokens.config import dev, prod
 
 message2 = 'strikes marked with * means good value'
 
@@ -115,8 +115,4 @@ async def pfp(ctx, member: Member = None):
     await ctx.message.delete()
     await discord.Message.delete(message)
 
-# async tasks
-# prod
 client.run(prod)
-# dev
-# client.run(dev)
