@@ -11,7 +11,7 @@ import os
 import datetime
 
 # local import 
-from tokens.config import dev, prod
+from config import dev, prod
 
 message2 = 'strikes marked with * means good value'
 
