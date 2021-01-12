@@ -119,7 +119,8 @@ async def pfp(ctx, member: Member = None):
 async def earnings(ctx,*arg):
     print('in earnings')
     message = "**EARNINGS THIS WEEK**\n"
-    res = requests.get("https://api.neetcode.com/earningsThisWeek").json()
+    # res = requests.get("https://api.neetcode.com/earningsThisWeek").json()
+    res = requests.get("0.0.0.0:5000/earningsThisWeek").json()
     count = 0
     for company in res:
         message += f"**{company['ticker']} ** / **{company['date']}** \n"
