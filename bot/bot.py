@@ -115,4 +115,20 @@ async def pfp(ctx, member: Member = None):
     await ctx.message.delete()
     await discord.Message.delete(message)
 
+@client.command()
+async def earnings(ctx,*arg):
+    print('in earnings')
+    message = "**EARNINGS THIS WEEK**\n"
+    res = requests.get("https://api.neetcode.com/earningsThisWeek").json()
+    count = 0
+    for company in res:
+        message += f"**{company['ticker']} ** / **{company['date']}** \n"
+        ## commented out. Maybe uncomment later on if it addsd too much characters in the message
+        # count += 1
+        # if count == 15: 
+        #     break
+    message_2= await ctx.send(message)
+    await asyncio.sleep(120)
+    await ctx.message.delete()
+    await discord.Message.delete(message_2)
 client.run(prod)

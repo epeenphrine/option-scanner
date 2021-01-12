@@ -1,5 +1,6 @@
 version: "3"
 services:
+  ##discord bot
   mean_thug:
     container_name: mean_thug 
     image: "mean_thug"
@@ -17,19 +18,11 @@ services:
       context: flask_api 
       dockerfile: flask.dev.Dockerfile
     restart: unless-stopped
+    volumes: 
+      - /tmp/json:/tmp/json
     ports:
       - 5001:5001
-
-  tda_script: 
-    container_name: tda_script 
-    image: "tda_script"
-    build:
-      context: flask_api 
-      dockerfile: script.Dockerfile
-    volumes: 
-      - /tmp/json:/tmp/json ## memory to save wear
-      - ./tokens:/app/tokens
-
+  ##web app
   option_scanner_frontend:
     container_name: option_scanner_frontend 
     image: "option_scanner_frontend"
@@ -40,3 +33,22 @@ services:
       - 3000:3000
     volumes: 
       - ./frontend:/app
+  ##script for getting option chains
+  tda_script: 
+    container_name: tda_script 
+    image: "tda_script"
+    build:
+      context: flask_api 
+      dockerfile: tda_script.Dockerfile
+    volumes: 
+      - /tmp/json:/tmp/json ## memory to save wear
+      - ./tokens:/app/tokens
+  ##earnings date
+  get_earnings_script:
+    container_name: get_earnings_script
+    image: "get_earnings_script"
+    build:
+      context: flask_api
+      dockerfile: get_earnings_script.Dockerfile
+    volumes:
+      - /tmp/json:/tmp/json

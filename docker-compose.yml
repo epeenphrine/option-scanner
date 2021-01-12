@@ -27,10 +27,11 @@ services:
     image: "tda_script"
     build:
       context: flask_api 
-      dockerfile: script.Dockerfile
+      dockerfile: tda_script.Dockerfile
     volumes: 
       - /tmp/json:/tmp/json ## memory to save wear
       - ./tokens:/app/tokens
+      - /tmp/data:/tmp/data
 
   ipo_scrape:
     container_name: ipo_scrape 

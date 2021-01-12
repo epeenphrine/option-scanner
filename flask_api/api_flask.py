@@ -38,10 +38,17 @@ def options_arbitrage():
         arbRatio = request.args.get('arbRatio', .5, type =float)
         ticker = request.args.get('ticker', None, type=str) 
     pass
-@app.route('/sp500/options/rawData', methods=['GET'])
+@app.route('/options/rawData', methods=['GET'])
 def rawData():
     if request.method == "GET":
-        with open('callie_scripts/option_chains_list.json', 'r') as f:
+        with open('/tmp/json/optionsChainsList.json', 'r') as f:
+            jsonObject = json.load(f)
+        return jsonify(jsonObject)
+
+@app.route('/earningsThisWeek')
+def earningsThisWeek():
+    if request.method =="GET":
+        with open('/tmp/json/companies_earnings.json') as f:
             jsonObject = json.load(f)
         return jsonify(jsonObject)
 
