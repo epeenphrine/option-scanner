@@ -120,7 +120,7 @@ async def earnings(ctx,*arg):
     print('in earnings')
     message = "**EARNINGS THIS WEEK**\n"
     # res = requests.get("https://api.neetcode.com/earningsThisWeek").json()
-    res = requests.get("localhost:5000/earningsThisWeek").json()
+    res = requests.get("http://0.0.0.0:5000/earningsThisWeek").json()
     count = 0
     for company in res:
         message += f"**{company['ticker']} ** / **{company['date']}** \n"
