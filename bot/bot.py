@@ -39,7 +39,7 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             goldenRatio = arg[1]
             totalVolume = arg[2] 
             openInterest = arg[3]
-            res = requests.get(f"http://flask_api:5000/callieSpreads?days={days}&goldenRatio={goldenRatio}&totalVolume={totalVolume}&openInterest={openInterest}").json()
+            res = requests.get(f"https://api.neetcode.com/callieSpreads?days={days}&goldenRatio={goldenRatio}&totalVolume={totalVolume}&openInterest={openInterest}").json()
             for company in res:
                 message += f"**__{company['ticker']}__** \n{company['dates']} \n"
                 for i in range(0, len(company['strikes'])):
@@ -56,8 +56,8 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
         if arg[0] and re.match("\d\d", arg[0]) and len(arg) == 1:
             message = ""
             days = arg[0]
-            res = requests.get(f'http://flask_api:5000/callieSpreads?days={days}').json()
-            res2 = requests.get(f"http://flask_api:5000/earningsThisWeek").json()
+            res = requests.get(f'https://api.neetcode.com/callieSpreads?days={days}').json()
+            res2 = requests.get(f"https://api.neetcode.com/earningsThisWeek").json()
             earnings_ticker = [company for company['ticker'] in res2]
             print(arg[0])
             print(res)
@@ -79,7 +79,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
     if arg:
         if arg[0] == "next":
             message = ""
-            res = requests.get("http://flask_api:5000/ipo/nextWeek").json()
+            res = requests.get("https://api.neetcode.com/ipo/nextWeek").json()
             for company in res:
                 message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
             message_2 = await ctx.send(message)
@@ -88,7 +88,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
             await discord.Message.delete(message_2)
     if not arg:
         message = ""
-        res = requests.get("http://flask_api:5000/ipo/thisWeek").json()
+        res = requests.get("https://api.neetcode.com/ipo/thisWeek").json()
         for company in res:
             message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
         message_2 = await ctx.send(message)
@@ -100,7 +100,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
 async def trend(ctx,*arg):
     print('in trend')
     message = "**stocktwats most popular to least popular**\n"
-    res = requests.get("https://api.stocktwits.com/api/2/trending/symbols.json").json()['symbols']
+    res = requests.get("httpss://api.stocktwits.com/api/2/trending/symbols.json").json()['symbols']
     count = 0
     for company in res:
         message += f"**{company['symbol']} **/ {company['title']} / watchlist_count : {company['watchlist_count']} \n"
@@ -125,8 +125,8 @@ async def pfp(ctx, member: Member = None):
 async def earnings(ctx,*arg):
     print('in earnings')
     message = "**EARNINGS THIS WEEK**\n"
-    # res = requests.get("https://api.neetcode.com/earningsThisWeek").json()
-    res = requests.get("http://flask_api:5000/earningsThisWeek").json()
+    # res = requests.get("httpss://api.neetcode.com/earningsThisWeek").json()
+    res = requests.get("https://api.neetcode.com/earningsThisWeek").json()
     count = 0
     for company in res:
         message += f"**{company['ticker']} ** / **{company['date']}** \n"
