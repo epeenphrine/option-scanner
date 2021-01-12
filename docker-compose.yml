@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
   mean_thug:
     container_name: mean_thug 
@@ -32,6 +32,7 @@ services:
       - /tmp/json:/tmp/json ## memory to save wear
       - ./tokens:/app/tokens
       - /tmp/data:/tmp/data
+
   ipo_scrape:
     container_name: ipo_scrape 
     image: "ipo_scrape"
@@ -40,6 +41,7 @@ services:
       dockerfile: ipo_scrape.Dockerfile
     volumes:
       - /tmp/json:/tmp/json 
+
   get_earnings_script:
     container_name: get_earnings_script
     image: "get_earnings_script"
