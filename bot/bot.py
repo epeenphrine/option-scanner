@@ -52,14 +52,20 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             await ctx.message.delete()
             await discord.Message.delete(message_2)
             print('deleted messages')
+
         if arg[0] and re.match("\d\d", arg[0]) and len(arg) == 1:
             message = ""
             days = arg[0]
             res = requests.get(f'http://flask_api:5000/callieSpreads?days={days}').json()
+            res2 = requests.get(f"http://flask_api:5000/earningsThisWeek").json()
+            earnings_ticker = [company for company['ticker'] in res2]
             print(arg[0])
             print(res)
             for company in res:
-                message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']}\n"
+                if company['ticker'] in earnings_ticker:
+                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} <-- this shit got earnings \n"
+                else:
+                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']}\n"
             #message_ = await ctx.send(f'`callies within 14 days | {message2} | scanned EST {scan_time_json} `')
             message_2 = await ctx.send(message)
             await asyncio.sleep(60)
@@ -73,7 +79,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
     if arg:
         if arg[0] == "next":
             message = ""
-            res = requests.get("http://flask_api/ipo/nextWeek").json()
+            res = requests.get("http://flask_api:5000/ipo/nextWeek").json()
             for company in res:
                 message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
             message_2 = await ctx.send(message)
@@ -82,7 +88,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
             await discord.Message.delete(message_2)
     if not arg:
         message = ""
-        res = requests.get("http://flask_api/ipo/thisWeek").json()
+        res = requests.get("http://flask_api:5000/ipo/thisWeek").json()
         for company in res:
             message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
         message_2 = await ctx.send(message)
