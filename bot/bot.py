@@ -58,12 +58,12 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             days = arg[0]
             res = requests.get(f'https://api.neetcode.com/callieSpreads?days={days}').json()
             res2 = requests.get(f"https://api.neetcode.com/earningsThisWeek").json()
-            earnings_ticker = [company for company['ticker'] in res2]
+            earnings_ticker = [company['ticker'] for company in res2]
             print(arg[0])
             print(res)
             for company in res:
                 if company['ticker'] in earnings_ticker:
-                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} <-- this shit got earnings \n"
+                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} **ER**\n"
                 else:
                     message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']}\n"
             #message_ = await ctx.send(f'`callies within 14 days | {message2} | scanned EST {scan_time_json} `')
