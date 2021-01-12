@@ -39,7 +39,7 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             goldenRatio = arg[1]
             totalVolume = arg[2] 
             openInterest = arg[3]
-            res = requests.get(f"flask_api:5000/callieSpreads?days={days}&goldenRatio={goldenRatio}&totalVolume={totalVolume}&openInterest={openInterest}").json()
+            res = requests.get(f"http://flask_api:5000/callieSpreads?days={days}&goldenRatio={goldenRatio}&totalVolume={totalVolume}&openInterest={openInterest}").json()
             for company in res:
                 message += f"**__{company['ticker']}__** \n{company['dates']} \n"
                 for i in range(0, len(company['strikes'])):
@@ -55,7 +55,7 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
         if arg[0] and re.match("\d\d", arg[0]) and len(arg) == 1:
             message = ""
             days = arg[0]
-            res = requests.get(f'flask_api:5000/callieSpreads?days={days}').json()
+            res = requests.get(f'http://flask_api:5000/callieSpreads?days={days}').json()
             print(arg[0])
             print(res)
             for company in res:
@@ -73,7 +73,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
     if arg:
         if arg[0] == "next":
             message = ""
-            res = requests.get("flask_api/ipo/nextWeek").json()
+            res = requests.get("http://flask_api/ipo/nextWeek").json()
             for company in res:
                 message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
             message_2 = await ctx.send(message)
@@ -82,7 +82,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
             await discord.Message.delete(message_2)
     if not arg:
         message = ""
-        res = requests.get("flask_api/ipo/thisWeek").json()
+        res = requests.get("http://flask_api/ipo/thisWeek").json()
         for company in res:
             message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
         message_2 = await ctx.send(message)
