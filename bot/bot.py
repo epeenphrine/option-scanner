@@ -75,6 +75,54 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             pass
 
 @client.command()
+async def calliebott(ctx, *arg): # <--- *arg stores arguments as tuples. Check print statements to see how it works
+    print('in calliebot')
+    print(arg) # <--- tuple. access tuple like a list/array 
+    if arg:
+        roles = ctx.guild.roles # <--- get server roles
+        author_role = ctx.author.roles # <-- all message author roles
+        if len(arg) == 4:
+            print('got custom arguments')
+            message = ""
+            days = arg[0] 
+            goldenRatio = arg[1]
+            totalVolume = arg[2] 
+            openInterest = arg[3]
+            res = requests.get(f"https://api.neetcode.com/callieSpreadsLong?days={days}&goldenRatio={goldenRatio}&totalVolume={totalVolume}&openInterest={openInterest}").json()
+            for company in res:
+                message += f"**__{company['ticker']}__** \n{company['dates']} \n"
+                for i in range(0, len(company['strikes'])):
+                    message += f"**{company['strikes'][i]}** | `{company['goldenRatio'][i]}|`"        
+                message += f"\n"
+                #message += f"/ {company['dates']} \n"
+            print(len(message))
+            message_2 = await ctx.send(message)
+            await asyncio.sleep(60)
+            await ctx.message.delete()
+            await discord.Message.delete(message_2)
+            print('deleted messages')
+
+        if arg[0] and re.match("\d\d", arg[0]) and len(arg) == 1:
+            message = ""
+            days = arg[0]
+            res = requests.get(f'https://api.neetcode.com/callieSpreadsLong?days={days}').json()
+            res2 = requests.get(f"https://api.neetcode.com/earningsThisWeek").json()
+            earnings_ticker = [company['ticker'] for company in res2]
+            print(arg[0])
+            print(res)
+            for company in res:
+                if company['ticker'] in earnings_ticker:
+                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} **ER**\n"
+                else:
+                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']}\n"
+            #message_ = await ctx.send(f'`callies within 14 days | {message2} | scanned EST {scan_time_json} `')
+            message_2 = await ctx.send(message)
+            await asyncio.sleep(60)
+            await ctx.message.delete()
+            await discord.Message.delete(message_2)
+        else:
+            pass
+@client.command()
 async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print statements to see how it works
     if arg:
         if arg[0] == "next":
