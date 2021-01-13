@@ -11,7 +11,7 @@ export default function ApiTables() {
   // call api on page load
   useEffect(async () => {
     const res = await fetch(
-      "https://api.neetcode.com/callieSpreads?days=14"
+      "https://api.neetcode.com/callieSpreadsLong?days=14"
     );
     const data = await res.json();
     setApi(data);
@@ -19,7 +19,7 @@ export default function ApiTables() {
 
   // call api using function based on events
   async function makeReq() {
-    const url = `https://api.neetcode.com/callieSpreads?days=${days}&goldenRatio=${goldenRatio}&totalVolume=${volume}&openInterest=${oi}`;
+    const url = `https://api.neetcode.com/callieSpreadsLong?days=${days}&goldenRatio=${goldenRatio}&totalVolume=${volume}&openInterest=${oi}`;
     const res = await fetch(url);
     const data = await res.json();
     console.log("make req ran ");

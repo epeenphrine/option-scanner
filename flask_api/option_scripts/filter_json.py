@@ -136,41 +136,42 @@ def get_callies_long(**data): ## pass in multiple paramters
         return message 
 
     for option in option_chains_list:
-        try:
-            option_dict = {}
-            name = option['underlying']['symbol']
-            underlying_price =  option['underlyingPrice']
-            option = option['callExpDateMap']
-            first_date = option[option_dates_filter[0]]
-            second_date = option[option_dates_filter[1]]
-            strikes = list( first_date.keys() ) ## list of strikes  given date
+        if option not in option_filter_list:
+            try:
+                option_dict = {}
+                name = option['underlying']['symbol']
+                underlying_price =  option['underlyingPrice']
+                option = option['callExpDateMap']
+                first_date = option[option_dates_filter[0]]
+                second_date = option[option_dates_filter[1]]
+                strikes = list( first_date.keys() ) ## list of strikes  given date
 
-            option_dict['ticker']  = name
-            option_dict['strikes'] = []
-            option_dict['goldenRatio'] = []
-            option_dict['prices'] = []
-            option_dict['underlyingPrice'] = round(underlying_price, 2)
+                option_dict['ticker']  = name
+                option_dict['strikes'] = []
+                option_dict['goldenRatio'] = []
+                option_dict['prices'] = []
+                option_dict['underlyingPrice'] = round(underlying_price, 2)
 
-            for strike in strikes:
-                # variables to filter calendar 
-                first_date_strike = first_date[strike][0]
-                second_date_strike = second_date[strike][0]
+                for strike in strikes:
+                    # variables to filter calendar 
+                    first_date_strike = first_date[strike][0]
+                    second_date_strike = second_date[strike][0]
 
-                golden_ratio = first_date_strike['mark'] / second_date_strike['mark'] ## bid, ask, mark, last ['']
-                price = second_date_strike['mark'] - first_date_strike['mark']
-                total_volume = first_date_strike['totalVolume'] + second_date_strike['totalVolume']
-                open_interest = first_date_strike['openInterest'] + second_date_strike['openInterest']
+                    golden_ratio = first_date_strike['mark'] / second_date_strike['mark'] ## bid, ask, mark, last ['']
+                    price = second_date_strike['mark'] - first_date_strike['mark']
+                    total_volume = first_date_strike['totalVolume'] + second_date_strike['totalVolume']
+                    open_interest = first_date_strike['openInterest'] + second_date_strike['openInterest']
 
-                volatility = first_date_strike['volatility']
-                theoreticalOptionValue = first_date_strike['theoreticalOptionValue']
+                    volatility = first_date_strike['volatility']
+                    theoreticalOptionValue = first_date_strike['theoreticalOptionValue']
 
-                if golden_ratio >= goldenRatio and golden_ratio < 1 and total_volume >= totalVolume and open_interest >= openInterest:
-                    option_dict['strikes'].append(strike) 
-                    option_dict['goldenRatio'].append(round(golden_ratio, 3)) 
-                    option_dict['dates'] = [option_dates_filter[0], option_dates_filter[1]]
-                    option_dict['prices'].append(round(price, 3))
-            if option_dict['strikes']:
-                option_filter_list.append(option_dict)
-        except:
-            print("error on this strike")
+                    if golden_ratio >= goldenRatio and golden_ratio < 1 and total_volume >= totalVolume and open_interest >= openInterest:
+                        option_dict['strikes'].append(strike) 
+                        option_dict['goldenRatio'].append(round(golden_ratio, 3)) 
+                        option_dict['dates'] = [option_dates_filter[0], option_dates_filter[1]]
+                        option_dict['prices'].append(round(price, 3))
+                if option_dict['strikes']:
+                    option_filter_list.append(option_dict)
+            except:
+                print("error on this strike")
     return option_filter_list 

@@ -84,10 +84,5 @@ def ipoNextWeek():
             jsonObject = json.load(f)
         return jsonify(jsonObject)
 
-#@app.route('/api/makeTdaRequest', methods=['GEt', 'POST'])
-#def makeTdaRequest():
-    #if request.method =='GET':
-        #start_tda_request = MakeRequest 
-        #return "finished running script"
 if __name__ == "__main__":
     app.run(host="0.0.0.0")
