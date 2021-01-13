@@ -1,5 +1,5 @@
 FROM python:3.6
 WORKDIR /app
-COPY . /app
+COPY ./option_scripts /app
 RUN pip install requests pytz pandas
-CMD python option_scripts/get_options_from_tda.py
+CMD python get_options_from_tda.py

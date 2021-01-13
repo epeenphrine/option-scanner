@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template, jsonify
-from option_scripts.filter_json import get_callies 
+from option_scripts.filter_json import *
 from flask_cors import CORS
 import json
 
@@ -32,6 +32,24 @@ def callie_spreads():
         data = option_filter
         return jsonify(data) 
 
+@app.route('/callieSpreadsLong', methods=['GET', 'POST'])
+def callie_spreads_long():
+    if request.method == 'POST':
+        print('in post ')
+        return 'something'
+    if request.method == 'GET':
+        days = request.args.get('days', 14, int)
+        goldenRatio = request.args.get('goldenRatio', .65,type=float)
+        totalVolume = request.args.get('totalVolume', 500,  type=int)
+        openInterest = request.args.get('openInterest', 1000, type=int)
+        option_filter = get_callies_long(
+            date_delta=days,
+            goldenRatio=goldenRatio,
+            totalVolume=totalVolume, 
+            openInterest=openInterest,
+            )
+        data = option_filter
+        return jsonify(data) 
 @app.route('/optionsArbitrage', methods=['GET', 'POST'])
 def options_arbitrage():
     if request.method == "POST":

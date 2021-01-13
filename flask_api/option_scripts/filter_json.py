@@ -5,8 +5,7 @@
 import json
 import datetime
 
-json_file_path_test = '/tmp/optionChainsList.json'
-json_file_path = '/tmp/json/optionChainsList.json'
+
 
 def get_front_date(date_delta):
         dates_list = []
@@ -34,14 +33,14 @@ def get_callies(**data): ## pass in multiple paramters
     use option_chains_list.json to filter for calendars with good ratios
     and return a dictionary  
     '''
-    print('in filter json')
+    print('in get caallies json')
     #print(data)
     date_delta = data['date_delta']
     goldenRatio = data['goldenRatio']
     totalVolume = data['totalVolume']
     openInterest = data['openInterest']
     print(data)
-    with open(json_file_path) as f:
+    with open('/tmp/json/optionChainsList.json', 'r') as f:
         option_chains_list = json.load(f)['optionChainsList']
     # print(option_chains_list)
     option_dates = list(option_chains_list[0]['callExpDateMap'].keys())
@@ -88,8 +87,8 @@ def get_callies(**data): ## pass in multiple paramters
 
                 volatility = first_date_strike['volatility']
                 theoreticalOptionValue = first_date_strike['theoreticalOptionValue']
-
-                if golden_ratio >= goldenRatio and golden_ratio <= 1 and total_volume >= totalVolume and open_interest >= openInterest: 
+                print(theoreticalOptionValue)
+                if golden_ratio >= goldenRatio and total_volume >= totalVolume and open_interest >= openInterest: 
                     option_dict['strikes'].append(strike) 
                     option_dict['goldenRatio'].append(round(golden_ratio, 3)) 
                     option_dict['dates'] = [option_dates_filter[0], option_dates_filter[1]]
@@ -106,21 +105,21 @@ def get_callies_long(**data): ## pass in multiple paramters
     use option_chains_list.json to filter for calendars with good ratios
     and return a dictionary  
     '''
-    print('in filter json')
+    print('in get callies long ')
     #print(data)
     date_delta = data['date_delta']
     goldenRatio = data['goldenRatio']
     totalVolume = data['totalVolume']
     openInterest = data['openInterest']
     print(data)
-    with open(json_file_path) as f:
+    with open('/tmp/json/optionChainsListLong', 'r') as f:
         option_chains_list = json.load(f)['optionChainsList']
     # print(option_chains_list)
     option_dates = list(option_chains_list[0]['callExpDateMap'].keys())
     front_date = get_front_date(date_delta)
     back_date = get_back_date(date_delta)
     option_dates_filter = []
-    option_filter_list = []
+    option_filter_list = get_callies(data) 
     ## new option dates using get date functions 
     for option_date in option_dates:
         if front_date in option_date:
@@ -161,7 +160,7 @@ def get_callies_long(**data): ## pass in multiple paramters
                 volatility = first_date_strike['volatility']
                 theoreticalOptionValue = first_date_strike['theoreticalOptionValue']
 
-                if golden_ratio >= goldenRatio and golden_ratio <= 1 and total_volume >= totalVolume and open_interest >= openInterest: 
+                if golden_ratio >= goldenRatio and golden_ratio <= 1 and total_volume >= totalVolume and open_interest >= openInterest:
                     option_dict['strikes'].append(strike) 
                     option_dict['goldenRatio'].append(round(golden_ratio, 3)) 
                     option_dict['dates'] = [option_dates_filter[0], option_dates_filter[1]]

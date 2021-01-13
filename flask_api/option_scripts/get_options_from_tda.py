@@ -105,7 +105,7 @@ def iter_requests(symbols, output_name):
             "optionChainsList": option_chains_list
         } 
     print('script finished check option_scripts directory for json files')
-    with open(f'/tmp/json/{output_name}', 'w') as f:
+    with open(f'/tmp/json/{output_name}.json', 'w') as f:
         json.dump(option_chains_dict, f)
     with open(f"./error_list.json", "w") as f:
         json.dump(error_list, f)
