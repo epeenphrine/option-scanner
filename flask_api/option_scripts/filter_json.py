@@ -89,7 +89,7 @@ def get_callies(**data): ## pass in multiple paramters
                 volatility = first_date_strike['volatility']
                 theoreticalOptionValue = first_date_strike['theoreticalOptionValue']
 
-                if golden_ratio >= goldenRatio and total_volume >= totalVolume and open_interest >= openInterest: 
+                if golden_ratio >= goldenRatio and golden_ratio <= 1 and total_volume >= totalVolume and open_interest >= openInterest: 
                     option_dict['strikes'].append(strike) 
                     option_dict['goldenRatio'].append(round(golden_ratio, 3)) 
                     option_dict['dates'] = [option_dates_filter[0], option_dates_filter[1]]
