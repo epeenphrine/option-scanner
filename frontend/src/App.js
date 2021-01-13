@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Table from './components/table/ApiTables';
 import Navbar from './components/navbar/Navbar';
 import Home from './components/home/Home';
+import Test from './components/table/Test'
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 					<Route exact path="/tables" component={Table} />
 					<Route exact path="/" component={Table} />
 				</Switch>
+				{/* <Test /> */}
 			</React.Fragment>
 		</Router>
 	);
