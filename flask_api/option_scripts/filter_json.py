@@ -123,7 +123,7 @@ def get_callies_long(**data): ## pass in multiple paramters
             totalVolume=totalVolume, 
             openInterest=openInterest,
     ) 
-
+    symbol_done = [symbol['ticker'] for symbol in option_filter_list] 
     ## new option dates using get date functions 
     for option_date in option_dates:
         if front_date in option_date:
@@ -136,8 +136,8 @@ def get_callies_long(**data): ## pass in multiple paramters
         return message 
 
     for option in option_chains_list:
-        if option not in option_filter_list:
-            try:
+        try:
+            if option['underlying']['symbol'] not in symbol_done:
                 option_dict = {}
                 name = option['underlying']['symbol']
                 underlying_price =  option['underlyingPrice']
@@ -172,6 +172,7 @@ def get_callies_long(**data): ## pass in multiple paramters
                         option_dict['prices'].append(round(price, 3))
                 if option_dict['strikes']:
                     option_filter_list.append(option_dict)
-            except:
-                print("error on this strike")
+                symbol_done.append(name)
+        except:
+            print("error on this strike")
     return option_filter_list 
