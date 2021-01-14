@@ -60,14 +60,14 @@ def get_callies(**data): ## pass in multiple paramters
     for option in option_chains_list:
         try:
             option_dict = {}
-            name = option['underlying']['symbol']
+            ticker = option['underlying']['symbol']
             underlying_price =  option['underlyingPrice']
             option = option['callExpDateMap']
             first_date = option[option_dates_filter[0]]
             second_date = option[option_dates_filter[1]]
             strikes = list( first_date.keys() ) ## list of strikes  given date
 
-            option_dict['ticker']  = name
+            option_dict['ticker']  = ticker
             option_dict['strikes'] = []
             option_dict['goldenRatio'] = []
             option_dict['prices'] = []
@@ -137,14 +137,14 @@ def get_callies_long(**data): ## pass in multiple paramters
         try:
             if option['underlying']['symbol'] not in symbol_done:
                 option_dict = {}
-                name = option['underlying']['symbol']
+                ticker = option['underlying']['symbol']
                 underlying_price =  option['underlyingPrice']
                 option = option['callExpDateMap']
                 first_date = option[option_dates_filter[0]]
                 second_date = option[option_dates_filter[1]]
                 strikes = list( first_date.keys() ) ## list of strikes  given date
 
-                option_dict['ticker']  = name
+                option_dict['ticker']  = ticker
                 option_dict['strikes'] = []
                 option_dict['goldenRatio'] = []
                 option_dict['prices'] = []
@@ -170,7 +170,53 @@ def get_callies_long(**data): ## pass in multiple paramters
                         option_dict['prices'].append(round(price, 3))
                 if option_dict['strikes']:
                     option_filter_list.append(option_dict)
-                symbol_done.append(name)
+                symbol_done.append(ticker)
         except:
             print("error on this strike")
     return option_filter_list 
+
+def get_big_trades(**data):
+    ## note to self ... params should be volume, oi, ratio
+    ratio_user = data['ratio_user'] 
+    volume_user = data['volume_user'] 
+    open_interest_user = data['open_interest_user'] 
+    option_filter_list = []
+    with open('/tmp/json/optionChainsListLong.json', 'r') as f:
+        option_chains_list = json.load(f)['optionChainsList']
+    for option in option_chains_list:
+        try:
+            option_dict ={}
+
+            ticker =  option['underlying']['symbol']
+            underlying_price =  option['underlyingPrice']
+            option_exp_dates = option['callExpDateMap'].keys()
+
+            option_dict['ticker'] = ticker
+            option_dict['strikes'] = []
+            option_dict['prices'] = []
+            option_dict['volume_oi_ratio'] = []
+            option_dict['volumes'] = []
+            option_dict['open_interests'] = []
+            option_dict['exp_dates'] = []
+            for exp_date in option_exp_dates:
+                strikes = option['callExpDateMap'][exp_date].keys()
+                for strike in strikes:
+                    strike_data = option['callExpDateMap'][exp_date][strike][0]
+                    price = strike_data['mark']
+                    volume = strike_data['totalVolume']
+                    open_interest = strike_data['openInterest']
+                    if open_interest != 0:
+                        volume_oi_ratio = volume / open_interest
+                        volume_oi_ratio = round(volume_oi_ratio, 2) 
+                    if volume_oi_ratio >= ratio_user and volume >= volume_user and open_interest >= open_interest_user:
+                        option_dict['strikes'].append(strike)
+                        option_dict['prices'].append(price)
+                        option_dict['volume_oi_ratio'].append(volume_oi_ratio)
+                        option_dict['volumes'].append(volume)
+                        option_dict['open_interests'].append(open_interest)
+                        option_dict['exp_dates'].append(exp_date)
+            if  option_dict['strikes']:
+                option_filter_list.append(option_dict)
+        except:
+            pass
+    return option_filter_list

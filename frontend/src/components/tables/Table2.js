@@ -54,7 +54,7 @@ export default function Table2(props) {
 	return (
 		<React.Fragment>
 			<div className="">
-				<DataTable title="calendar spreads" columns={columns} data={rows} responsive={true} highlightOnHover={true} />
+				<DataTable columns={columns} data={rows} responsive={true} highlightOnHover={true} />
 			</div>
 		</React.Fragment>
 	);

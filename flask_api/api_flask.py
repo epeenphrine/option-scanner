@@ -13,11 +13,8 @@ def hello_world():
     return "home"
 
 #example : yourip:5000/api/callieSpreads?days=20&goldenRatio=.7&volume=50
-@app.route('/callieSpreads', methods=['GET', 'POST'])
+@app.route('/callieSpreads', methods=['GET'])
 def callie_spreads():
-    if request.method == 'POST':
-        print('in post ')
-        return 'something'
     if request.method == 'GET':
         days = request.args.get('days', 14, int)
         goldenRatio = request.args.get('goldenRatio', .65,type=float)
@@ -32,11 +29,8 @@ def callie_spreads():
         data = option_filter
         return jsonify(data) 
 
-@app.route('/callieSpreadsLong', methods=['GET', 'POST'])
+@app.route('/callieSpreadsLong', methods=['GET'])
 def callie_spreads_long():
-    if request.method == 'POST':
-        print('in post ')
-        return 'something'
     if request.method == 'GET':
         days = request.args.get('days', 14, int)
         goldenRatio = request.args.get('goldenRatio', .65,type=float)
@@ -50,11 +44,20 @@ def callie_spreads_long():
             )
         data = option_filter
         return jsonify(data) 
-@app.route('/optionsArbitrage', methods=['GET', 'POST'])
-def options_arbitrage():
-    if request.method == "POST":
-        arbRatio = request.args.get('arbRatio', .5, type =float)
-        ticker = request.args.get('ticker', None, type=str) 
+
+@app.route('/bigTrades', methods=['GET'])
+def big_trades():
+    if request.method == "GET":
+        ratio = request.args.get('ratio', 4,type=float)
+        volume = request.args.get('volume', 1000,  type=int)
+        open_interest = request.args.get('openInterest', 1000, type=int)
+        option_filter = get_big_trades(
+            ratio_user=ratio, 
+            volume_user=volume,
+            open_interest_user= open_interest,
+            )
+        data = option_filter
+        return jsonify(data) 
     pass
 @app.route('/options/rawData', methods=['GET'])
 def rawData():

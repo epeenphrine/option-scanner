@@ -8,6 +8,7 @@ export default function ApiTables() {
   const [goldenRatio, setGoldenRatio] = useState(0.6);
   const [volume, setVolume] = useState(500);
   const [oi, setOi] = useState(1000);
+  const [table, setTable] = useState('react-table')
 
   // call api on page load
   useEffect(async () => {
