@@ -5,8 +5,6 @@
 import json
 import datetime
 
-
-
 def get_front_date(date_delta):
         dates_list = []
         for i in range(0, date_delta):
