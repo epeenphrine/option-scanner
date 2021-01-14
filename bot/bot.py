@@ -75,6 +75,49 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             pass
 
 @client.command()
+async def bigtrades(ctx, *arg): # <--- *arg stores arguments as tuples. Check print statements to see how it works
+    print('in big trades')
+    print(arg) # <--- tuple. access tuple like a list/array 
+    if arg:
+        roles = ctx.guild.roles # <--- get server roles
+        author_role = ctx.author.roles # <-- all message author roles
+        if len(arg) == 3:
+            print('got custom arguments')
+            message = ""
+            ratio = arg[0] 
+            volume = arg[1] 
+            openInterest = arg[2]
+            res = requests.get(f"https://api.neetcode.com/bigTrades?ratio=={ratio}&volume={volume}&openInterest={openInterest}").json()
+            for company in res:
+                message += f"**__{company['ticker']}__** \n{company['exp_dates']} \n"
+                for i in range(0, len(company['strikes'])):
+                    message += f"**{company['strikes'][i]}** | `{company['volume_oi_ratio'][i]}|`"        
+                message += f"\n"
+                #message += f"/ {company['dates']} \n"
+            print(len(message))
+            message_2 = await ctx.send(message)
+            await asyncio.sleep(60)
+            await ctx.message.delete()
+            await discord.Message.delete(message_2)
+            print('deleted messages')
+    if not arg: 
+        message = ""
+        res = requests.get(f'https://api.neetcode.com/bigTrades').json()
+        res2 = requests.get(f"https://api.neetcode.com/earningsThisWeek").json()
+        earnings_ticker = [company['ticker'] for company in res2]
+        print(res)
+        for company in res:
+            if company['ticker'] in earnings_ticker:
+                message += f"{company['ticker']} / `{company['strikes']}` / {company['exp_dates']} **ER**\n"
+            else:
+                message += f"{company['ticker']} / `{company['strikes']}` / {company['exp_dates']}\n"
+        #message_ = await ctx.send(f'`callies within 14 days | {message2} | scanned EST {scan_time_json} `')
+        message_2 = await ctx.send(message)
+        await asyncio.sleep(60)
+        await ctx.message.delete()
+        await discord.Message.delete(message_2)
+
+@client.command()
 async def calliebott(ctx, *arg): # <--- *arg stores arguments as tuples. Check print statements to see how it works
     print('in calliebot')
     print(arg) # <--- tuple. access tuple like a list/array 
