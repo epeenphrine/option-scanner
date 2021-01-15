@@ -181,7 +181,8 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
         message = ""
         res = requests.get("https://api.neetcode.com/ipo/thisWeek").json()
         for company in res:
-            message += f"{company['Company Name']} / **{company['Proposed Symbol']}** / {company['Price Range']} / **{company['Week Of']}**\n"
+            print(company)
+            message += f"{company['companyName']} / **{company['proposedTickerSymbol']}** / {company['proposedSharePrice']} / **{company['expectedPriceDate']}**\n"
         message_2 = await ctx.send(message)
         await asyncio.sleep(120)
         await ctx.message.delete()
