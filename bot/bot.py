@@ -192,7 +192,7 @@ async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print st
 async def trend(ctx,*arg):
     print('in trend')
     message = "**stocktwats most popular to least popular**\n"
-    res = requests.get("httpss://api.stocktwits.com/api/2/trending/symbols.json").json()['symbols']
+    res = requests.get("https://api.stocktwits.com/api/2/trending/symbols.json").json()['symbols']
     count = 0
     for company in res:
         message += f"**{company['symbol']} **/ {company['title']} / watchlist_count : {company['watchlist_count']} \n"
