@@ -56,9 +56,12 @@ symbols2 = get_nasdaq_list()
 option_chains_list = [
 
 ]
-
-with open('./error_list.json','r') as f:
-    error_list = json.load(f)
+try:
+    with open('./error_list.json','r') as f:
+        error_list = json.load(f)
+except: 
+    print("error list probably doesn't exist locally... creating a empty error_list variable")
+    error_list = []
 done_list = []
 def iter_requests(symbols, output_name):
     url = 'https://api.tdameritrade.com/v1/marketdata/chains'

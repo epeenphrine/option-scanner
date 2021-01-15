@@ -1,0 +1,25 @@
+--2021-01-15 02:53:23--  https://api.nasdaq.com/api/screener/stocks?tableonly=true
+Loaded CA certificate '/etc/ssl/certs/ca-certificates.crt'
+Resolving api.nasdaq.com (api.nasdaq.com)... 104.64.214.175, 2600:1405:c000:2b4::1b46, 2600:1405:c000:28f::1b46
+Connecting to api.nasdaq.com (api.nasdaq.com)|104.64.214.175|:443... connected.
+HTTP request sent, awaiting response... Read error (Success.) in headers.
+Retrying.
+
+--2021-01-15 03:08:24--  (try: 2)  https://api.nasdaq.com/api/screener/stocks?tableonly=true
+Connecting to api.nasdaq.com (api.nasdaq.com)|104.64.214.175|:443... connected.
+HTTP request sent, awaiting response... Read error (Success.) in headers.
+Retrying.
+
+--2021-01-15 03:23:26--  (try: 3)  https://api.nasdaq.com/api/screener/stocks?tableonly=true
+Connecting to api.nasdaq.com (api.nasdaq.com)|104.64.214.175|:443... connected.
+HTTP request sent, awaiting response... Read error (Success.) in headers.
+Retrying.
+
+--2021-01-15 03:38:29--  (try: 4)  https://api.nasdaq.com/api/screener/stocks?tableonly=true
+Connecting to api.nasdaq.com (api.nasdaq.com)|104.64.214.175|:443... connected.
+HTTP request sent, awaiting response... Read error (Success.) in headers.
+Retrying.
+
+--2021-01-15 03:53:33--  (try: 5)  https://api.nasdaq.com/api/screener/stocks?tableonly=true
+Connecting to api.nasdaq.com (api.nasdaq.com)|104.64.214.175|:443... connected.
+HTTP request sent, awaiting response... 

@@ -33,12 +33,12 @@ services:
       - ./tokens:/app/tokens
       - /tmp/data:/tmp/data
 
-  ipo_scrape:
-    container_name: ipo_scrape 
-    image: "ipo_scrape"
+  6h_scripts:
+    container_name: 6h_scripts 
+    image: "6h_scripts"
     build:
-      context: flask_api
-      dockerfile: ipo_scrape.Dockerfile
+      context: flask_api 
+      dockerfile: 6h_scripts.Dockerfile
     volumes:
       - /tmp/json:/tmp/json 
 
