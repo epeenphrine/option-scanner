@@ -12,6 +12,7 @@ import datetime
 
 # local import 
 from config import dev, prod
+from tweets import get_tweet_urls
 
 message2 = 'strikes marked with * means good value'
 
@@ -230,4 +231,22 @@ async def earnings(ctx,*arg):
     await asyncio.sleep(120)
     await ctx.message.delete()
     await discord.Message.delete(message_2)
+@tasks.loop(seconds=30)
+async def get_tweets_30s():
+    target_channel_id = 649629310998544425
+    print('in get_tweets_30s')
+    message_channel = client.get_channel(target_channel_id)
+    new_tweet_urls = get_tweet_urls()
+    messages = []
+    for url in new_tweet_urls:
+        message = await message_channel.send(url)
+        messages.append(message)
+    await asyncio.sleep(25)
+    for message in messages:
+        await discord.Message.delete(message)
+@get_tweets_30s.before_loop
+async def before():
+    await client.wait_until_ready()
+    print("Finished waiting")
+get_tweets_30s.start()
 client.run(prod)

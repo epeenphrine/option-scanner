@@ -19,7 +19,6 @@ df_dict = df.to_dict('records')
 with open('/tmp/json/nasdaq_listings_sorted_volume.json', 'w') as f:
     json.dump(df_dict, f)
 print(df_dict)
-
 time.sleep(20)
 #%%
 import time
