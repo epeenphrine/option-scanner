@@ -28,7 +28,7 @@ def get_tweet_urls():
         # 'SqueezeMetrics',
         'pakpakchicken'
         'cnbcnow',
-        'trinhnomics',
+        'Trinhnomics',
         'spotgamma', 
         'WallStJesus'
     ]
