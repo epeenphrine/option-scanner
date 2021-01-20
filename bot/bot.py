@@ -235,16 +235,16 @@ async def earnings(ctx,*arg):
 @tasks.loop(seconds=60)
 async def get_tweets_60s():
     main_chat_id = 492405515931090966 
-    bot_chat_id = 649629310998544425 
+    tweets_chat_id = 801541146668564521
     print('in get_tweets_30s')
     main_chat = client.get_channel(main_chat_id)
-    bot_chat = client.get_channel(bot_chat_id)
+    tweets_chat = client.get_channel(tweets_chat_id)
     new_tweet_urls = get_tweet_urls()
     print(new_tweet_urls)
     messages = []
     for url in new_tweet_urls:
         message = await main_chat.send(url)
-        await bot_chat.send(url)
+        await tweets_chat.send(url)
         messages.append(message)
     await asyncio.sleep(58)
     for message in messages:
