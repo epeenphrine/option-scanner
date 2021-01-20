@@ -232,8 +232,8 @@ async def earnings(ctx,*arg):
     await ctx.message.delete()
     await discord.Message.delete(message_2)
 
-@tasks.loop(seconds=30)
-async def get_tweets_30s():
+@tasks.loop(seconds=60)
+async def get_tweets_60s():
     main_chat_id = 492405515931090966 
     bot_chat_id = 649629310998544425 
     print('in get_tweets_30s')
@@ -246,12 +246,12 @@ async def get_tweets_30s():
         message = await main_chat.send(url)
         await bot_chat.send(url)
         messages.append(message)
-    await asyncio.sleep(25)
+    await asyncio.sleep(58)
     for message in messages:
         await discord.Message.delete(message)
 @get_tweets_30s.before_loop
 async def before():
     await client.wait_until_ready()
     print("Finished waiting")
-get_tweets_30s.start()
+get_tweets_60s.start()
 client.run(prod)
