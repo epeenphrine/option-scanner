@@ -26,6 +26,7 @@ def get_tweet_urls():
         'zerohedge', 
         'LiveSquawk', 
         # 'SqueezeMetrics',
+        'CitronResearch', 
         'pakpakchicken',
         'cnbcnow',
         'Trinhnomics',
@@ -50,7 +51,6 @@ def get_tweet_urls():
         if tweet_url not in tweet_urls:
             tweet_urls.append(tweet_url)
             new_tweets.append(tweet_url) 
-    print(new_tweets)
     with open('/tmp/json/tweets.json','w') as f:
         json.dump(tweet_urls, f)
     return new_tweets 
