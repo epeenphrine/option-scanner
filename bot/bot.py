@@ -231,7 +231,7 @@ async def earnings(ctx,*arg):
     await asyncio.sleep(120)
     await ctx.message.delete()
     await discord.Message.delete(message_2)
-@tasks.loop(seconds=30)
+@tasks.loop(seconds=60)
 async def get_tweets_30s():
     target_channel_id = 492405515931090966 
     print('in get_tweets_30s')
@@ -241,7 +241,7 @@ async def get_tweets_30s():
     for url in new_tweet_urls:
         message = await message_channel.send(url)
         messages.append(message)
-    await asyncio.sleep(25)
+    await asyncio.sleep(55)
     for message in messages:
         await discord.Message.delete(message)
 @get_tweets_30s.before_loop
