@@ -26,6 +26,7 @@ def get_tweet_urls():
         'zerohedge', 
         'LiveSquawk', 
         # 'SqueezeMetrics',
+        'pakpakchicken'
         'cnbcnow',
         'trinhnomics',
         'spotgamma', 
