@@ -8,7 +8,7 @@ def get_nasdaq_list():
     """
     use nasdaq listings from nasdaq api and then use cboe options listings to filter companies with option chains
     """
-    df = pd.read_csv('/tmp/data/cboe_all_options.csv')
+    df = pd.read_csv('/tmp/data/cboe_all.csv')
     df_dict = df.to_dict('records')
     options_list = [company[' Stock Symbol'] for company in df_dict]
     with open('/tmp/json/nasdaq_listings_sorted_volume.json', 'r') as f:
