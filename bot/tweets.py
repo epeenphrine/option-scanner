@@ -31,7 +31,8 @@ def get_tweet_urls():
         'cnbcnow',
         'Trinhnomics',
         'spotgamma', 
-        'WallStJesus'
+        'WallStJesus',
+        'givemethegoodz'
     ]
     try:
         print('opening json')

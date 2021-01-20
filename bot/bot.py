@@ -244,9 +244,9 @@ async def get_tweets_30s():
     for url in new_tweet_urls:
         message = await message_channel.send(url)
         messages.append(message)
-    await asyncio.sleep(25)
-    for message in messages:
-        await discord.Message.delete(message)
+    # await asyncio.sleep(25)
+    # for message in messages:
+    #     await discord.Message.delete(message)
 @get_tweets_30s.before_loop
 async def before():
     await client.wait_until_ready()
