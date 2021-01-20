@@ -234,8 +234,8 @@ async def earnings(ctx,*arg):
 
 @tasks.loop(seconds=30)
 async def get_tweets_30s():
-    # target_channel_id = 492405515931090966 
-    target_channel_id = 649629310998544425 
+    target_channel_id = 492405515931090966 
+    # target_channel_id = 649629310998544425 
     print('in get_tweets_30s')
     message_channel = client.get_channel(target_channel_id)
     new_tweet_urls = get_tweet_urls()
