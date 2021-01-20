@@ -249,7 +249,7 @@ async def get_tweets_60s():
     await asyncio.sleep(58)
     for message in messages:
         await discord.Message.delete(message)
-@get_tweets_30s.before_loop
+@get_tweets_60s.before_loop
 async def before():
     await client.wait_until_ready()
     print("Finished waiting")
