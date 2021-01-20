@@ -25,6 +25,7 @@ def get_tweet_urls():
     handles = [
         'zerohedge', 
         'LiveSquawk', 
+        'DeItaone',
         # 'SqueezeMetrics',
         'CitronResearch', 
         'pakpakchicken',
