@@ -22,7 +22,7 @@ def get_short_list():
     df_dict = df.to_dict('records')
     options_list = [company[' Stock Symbol'] for company in df_dict]
     watchlist_filename = "/tmp/json/nasdaq_listings_sorted_volume.json"
-    with open("/tmp/json/nasdaq_listings_sorted_volume_short.json", 'r') as f:
+    with open("/tmp/json/nasdaq_listings_sorted_volume.json", 'r') as f:
         nasdaq_listings = json.load(f)
     tickers = [company['symbol'] for company in nasdaq_listings]
     tickers_filter = [ticker for ticker in tickers if ticker in options_list]
