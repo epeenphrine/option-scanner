@@ -37,7 +37,8 @@ def get_tweet_urls():
         'firstsquawk',
         'benzinga',
         'bespokeinvest',
-        'stocktwits'
+        'stocktwits',
+        'eWhispers',
     ]
     try:
         print('opening json')
