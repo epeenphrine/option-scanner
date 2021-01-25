@@ -236,7 +236,7 @@ async def earnings(ctx,*arg):
 async def get_tweets_60s():
     main_chat_id = 492405515931090966 
     tweets_chat_id = 801541146668564521
-    print('in get_tweets_30s')
+    print('in get_tweets_60s')
     main_chat = client.get_channel(main_chat_id)
     tweets_chat = client.get_channel(tweets_chat_id)
     new_tweet_urls = get_tweet_urls()

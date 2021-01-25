@@ -16,6 +16,7 @@ def get_nasdaq_list():
     tickers = [company['symbol'] for company in nasdaq_listings]
     tickers_filter = [ticker for ticker in tickers if ticker in options_list]
     return tickers_filter
+
 def get_short_list():
     '''returns a shorter list because it checks for weeklies'''
     df = pd.read_csv('/tmp/data/cboe_weeklies.csv')

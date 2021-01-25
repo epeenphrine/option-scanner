@@ -44,7 +44,6 @@ def get_tweet_urls():
         print('opening json')
         with open('/tmp/json/tweets.json', 'r') as f:
             tweet_urls = json.load(f) 
-            print(tweet_urls)
     except:
         tweet_urls= [
 
