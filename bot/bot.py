@@ -246,7 +246,7 @@ async def get_tweets_60s():
         message = await main_chat.send(url)
         await tweets_chat.send(url)
         messages.append(message)
-    await asyncio.sleep(58)
+    await asyncio.sleep(55)
     for message in messages:
         await discord.Message.delete(message)
 @get_tweets_60s.before_loop
