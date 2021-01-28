@@ -29,6 +29,7 @@ def get_tweet_urls():
         'elonmusk',
         'CitronResearch', 
         'pakpakchicken',
+        'stockhaltbot',
         'cnbcnow',
         'Trinhnomics',
         'spotgamma', 
