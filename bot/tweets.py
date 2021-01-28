@@ -55,7 +55,7 @@ def get_tweet_urls():
         tweet_url = f'https://twitter.com/{handle}/statuses/{handle_recent.id}'
         if tweet_url not in tweet_urls:
             tweet_urls.append(tweet_url)
-            
+            new_tweets.append(tweet_url)
     with open('/tmp/json/tweets.json','w') as f:
         json.dump(tweet_urls, f)
     return new_tweets 
