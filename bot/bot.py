@@ -254,8 +254,8 @@ async def get_tweets_60s():
         await discord.Message.delete(message)
 @tasks.loop(seconds=30)
 async def get_halts_30s():
-    # main_chat_id = 492405515931090966 
-    main_chat_id = 649629310998544425
+    main_chat_id = 492405515931090966 
+    # main_chat_id = 649629310998544425
     halt_chat_id = 801541146668564521
     print('in get_halts_30s')
     main_chat = client.get_channel(main_chat_id)
