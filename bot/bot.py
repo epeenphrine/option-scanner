@@ -264,7 +264,7 @@ async def get_halts_30s():
     print(new_halts)
     messages = []
     for halt in new_halts:
-        if halt['haltTime']:
+        if halt['haltTime'] and halt['resumptionTime'] != None:
             halt_message = '**HALTED** \n'
             halt_message += f"{halt['symbol']} / {halt['haltTime']} / reason : {halt['reason']}"
         if halt['resumptionTime']:
