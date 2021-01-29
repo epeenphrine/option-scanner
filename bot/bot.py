@@ -270,7 +270,7 @@ async def get_halts_30s():
         if halt['resumptionTime']:
             resume_message = '**RESUME** \n'
             resume_message += f"{halt['symbol']} / {halt['resumptionTime']} / reason : {halt['reason']} "
-        if halt['haltTime']:
+        if halt['haltTime'] and halt['resumptionTime'] != None:
             message = await main_chat.send(halt_message)
         if halt['resumptionTime']:
             message = await main_chat.send(resume_message)
