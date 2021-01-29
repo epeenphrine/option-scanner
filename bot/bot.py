@@ -13,6 +13,7 @@ import datetime
 # local import 
 from config import dev, prod
 from tweets import get_tweet_urls
+from halts import get_halts
 
 message2 = 'strikes marked with * means good value'
 
@@ -251,9 +252,45 @@ async def get_tweets_60s():
     for message in messages:
         print(f'deleting : {message}')
         await discord.Message.delete(message)
+@tasks.loop(seconds=30)
+async def get_halts_30s():
+    # main_chat_id = 492405515931090966 
+    main_chat_id = 649629310998544425
+    halt_chat_id = 801541146668564521
+    print('in get_halts_30s')
+    main_chat = client.get_channel(main_chat_id)
+    tweets_chat = client.get_channel(halt_chat_id)
+    new_halts = get_halts()
+    print(new_halts)
+    messages = []
+    for halt in new_halts:
+        if halt['haltTime']:
+            halt_message = 'HALTED \n'
+            halt_message += f"{halt['symbol']} / {halt['haltTime']} / reason : {halt['reason']}"
+        if halt['resumptionTime']:
+            resume_message = 'RESUME \n'
+            resume_message += f"{halt['symbol']} / {halt['resumptionTime']} / reason : {halt['reason']} "
+        if halt['haltTime']:
+            message = await main_chat.send(halt_message)
+        if halt['resumptionTime']:
+            message = await main_chat.send(resume_message)
+        # await tweets_chat.send(url)
+        messages.append(message)
+    print('awaiting 28')
+    await asyncio.sleep(28)
+    for message in messages:
+        print(f'deleting : {message}')
+        await discord.Message.delete(message)
+
 @get_tweets_60s.before_loop
 async def before():
     await client.wait_until_ready()
     print("Finished waiting")
+
+@get_halts_30s.before_loop
+async def before():
+    await client.wait_until_ready()
+    print('finished awaiting')
 get_tweets_60s.start()
+get_halts_30s.start()
 client.run(prod)
