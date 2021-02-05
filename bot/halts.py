@@ -4,6 +4,9 @@ import requests
 import json 
 
 def get_halts():
+    """
+    use nyse api to get halts. Saves a json locally and then compares the new reponse to the local json to see if new halts or resumptions
+    """
     res = requests.get('https://www.nyse.com/api/trade-halts/current?offset=0&max=50').json()
     halts = res['results']['tradeHalts']
     try:

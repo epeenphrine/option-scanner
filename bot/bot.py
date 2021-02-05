@@ -14,10 +14,12 @@ import datetime
 from config import dev, prod
 from tweets import get_tweet_urls
 from halts import get_halts
+from prices import get_prices
 
 message2 = 'strikes marked with * means good value'
 
 client = commands.Bot(command_prefix='!')
+
 @client.command()
 async def test(ctx):
     await ctx.send('testing')
@@ -233,6 +235,13 @@ async def earnings(ctx,*arg):
     await ctx.message.delete()
     await discord.Message.delete(message_2)
 
+# @client.command()
+# async def price(ctx, *arg):
+#     print('in price')
+#     if arg and len(arg) == 2:
+#         print('custom commands conditions met')
+#         ticker = arg[1]
+         
 @tasks.loop(seconds=60)
 async def get_tweets_60s():
     main_chat_id = 492405515931090966 
@@ -252,6 +261,7 @@ async def get_tweets_60s():
     for message in messages:
         print(f'deleting : {message}')
         await discord.Message.delete(message)
+
 @tasks.loop(seconds=30)
 async def get_halts_30s():
     main_chat_id = 492405515931090966 
