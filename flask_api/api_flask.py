@@ -12,6 +12,14 @@ def hello_world():
     message = "" 
     return "home"
 
+
+@app.route('/rawData', methods=['GET'])
+def raw_data():
+    if request.method == 'GET':
+        with open('/tmp/json/optionChainsListLong.json', 'r') as f:
+            raw_dat = json.load(f)
+            return jsonify(raw_dat)
+
 #example : yourip:5000/api/callieSpreads?days=20&goldenRatio=.7&volume=50
 @app.route('/callieSpreads', methods=['GET'])
 def callie_spreads():
