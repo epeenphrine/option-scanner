@@ -22,7 +22,7 @@ export default function Navbar() {
 					</button>
 					<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
 						<div className="navbar-nav">
-							<Link className="nav-item nav-link active" to="/">
+							<Link className="nav-item nav-link" to="/">
 								Callie Spreads<span className="sr-only" />
 							</Link>
 							<Link className="nav-item nav-link" to="bigTrades">
