@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import CheckBox from './CheckBox';
 import Tables from './Tables';
 import Table2 from './Table2';
+import About from './About'
 export default function ApiTables() {
 	const [ api, setApi ] = useState([]);
 	const [ days, setDays ] = useState(15);
@@ -29,8 +30,7 @@ export default function ApiTables() {
 
 	return (
 		<React.Fragment>
-			<h1 className="display-6 text-center">Quickly find calendar ratios!</h1>
-			<h1 className="display-6 text-center">The golden ratio is calculated by short / long leg</h1>
+			<About />
 			<CheckBox
 				makeReq={makeReq}
 				setDays={setDays}

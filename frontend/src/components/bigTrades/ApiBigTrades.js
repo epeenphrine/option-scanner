@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Table from './Table'
+import About from './About'
 export default function ApiBigTrades() {
 	const [ api, setApi ] = useState([]);
 	const [ ratio, setRatio] = useState(0.6);
@@ -26,6 +27,7 @@ export default function ApiBigTrades() {
 
     return (
         <React.Fragment>
+			<About />
             <Table api={api} />
         </React.Fragment>
     )
