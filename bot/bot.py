@@ -265,11 +265,10 @@ async def get_tweets_60s():
 @tasks.loop(seconds=30)
 async def get_halts_30s():
     main_chat_id = 492405515931090966 
-    # main_chat_id = 649629310998544425
-    halt_chat_id = 801541146668564521
+    halt_chat_id = 808544039850344488 
     print('in get_halts_30s')
     main_chat = client.get_channel(main_chat_id)
-    tweets_chat = client.get_channel(halt_chat_id)
+    halt_chat = client.get_channel(halt_chat_id)
     new_halts = get_halts()
     print(new_halts)
     messages = []
@@ -278,10 +277,12 @@ async def get_halts_30s():
             halt_message = '**HALTED** \n'
             halt_message += f"{halt['symbol']} / {halt['haltTime']} / reason : {halt['reason']}"
             message = await main_chat.send(halt_message)
+            await  halt_chat.send(halt_message)
         if halt['resumptionTime']:
             resume_message = '**RESUME** \n'
             resume_message += f"{halt['symbol']} / {halt['resumptionTime']} / reason : {halt['reason']} "
             message = await main_chat.send(resume_message)
+            await  halt_chat.send(resume_message)
         # await tweets_chat.send(url)
         messages.append(message)
     print('awaiting 28')
