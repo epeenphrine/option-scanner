@@ -21,8 +21,8 @@ async def on_ready():
     test_chat_id = 649629310998544425
     main_chat_id = 492405515931090966
     test_chat = client.get_channel(test_chat_id)
+    main_chat = client.get_channel(main_chat_id)
     data = make_req()
-    print('script running')
     message = ""
     count = 0
     for event in data:
@@ -32,7 +32,8 @@ async def on_ready():
         # count += 1
         # if count == 5:
         #     break
-    await test_chat.send(message)
+    await main_chat.send(message)
     await client.close()
+    print('finished my fx script')
 
 client.run(prod)
