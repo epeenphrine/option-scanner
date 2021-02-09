@@ -49,4 +49,11 @@ services:
       context: flask_api
       dockerfile: get_earnings_script.Dockerfile
     volumes:
-      - /tmp/json:/tmp/json
+      - /tmp/json:/tmp/json  
+
+   myfxbook_script:
+    container_name: myfxbook_script
+    image: "myfxbook_script"
+    build:
+      context: bot
+      dockerfile: myfxbook_script.Dockerfile
