@@ -33,6 +33,7 @@ async def on_ready():
         # if count == 5:
         #     break
     await main_chat.send(message)
+    await main_chat.send('<@142160963368517632> RAN CALENDAR ')
     await client.close()
     print('finished my fx script')
 
