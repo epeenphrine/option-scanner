@@ -51,7 +51,7 @@ services:
     volumes:
       - /tmp/json:/tmp/json  
 
-   myfxbook_script:
+  myfxbook_script:
     container_name: myfxbook_script
     image: "myfxbook_script"
     build:
