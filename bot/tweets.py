@@ -35,7 +35,6 @@ def get_tweet_urls():
         'WallStJesus',
         'givemethegoodz',
         'firstsquawk',
-        'benzinga',
         'bespokeinvest',
         'stocktwits',
         'lingeriefc',
