@@ -30,7 +30,6 @@ services:
       dockerfile: tda_script.Dockerfile
     volumes: 
       - /tmp/json:/tmp/json ## memory to save wear
-      - ./tokens:/app/tokens
       - /tmp/data:/tmp/data
 
   6h_scripts:
