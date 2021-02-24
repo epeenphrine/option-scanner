@@ -35,7 +35,7 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
     print(arg) # <--- tuple. access tuple like a list/array 
     if arg:
         roles = ctx.guild.roles # <--- get server roles
-        author_role = ctx.author.roles # <-- all message author roles
+        author_role = ctx﻿.author.roles # <-- all message author roles
         if len(arg) == 4:
             print('got custom arguments')
             message = ""
@@ -242,7 +242,7 @@ async def earnings(ctx,*arg):
 #         print('custom commands conditions met')
 #         ticker = arg[1]
          
-@tasks.loop(seconds=60)
+@tasks.loop(seconds=1)
 async def get_tweets_60s():
     main_chat_id = 492405515931090966 
     tweets_chat_id = 801541146668564521
@@ -256,11 +256,14 @@ async def get_tweets_60s():
         message = await main_chat.send(url)
         await tweets_chat.send(url)
         messages.append(message)
-    print('awaiting 55s')
-    await asyncio.sleep(55)
-    for message in messages:
-        print(f'deleting : {message}')
-        await discord.Message.delete(message)
+    if messages: 
+        print('awaiting 55s')
+        await asyncio.sleep(60)
+        for message in messages:
+            print(f'deleting : {message}')
+            await discord.Message.delete(message)
+    else:
+        print('no message skiping await')
 
 @tasks.loop(seconds=30)
 async def get_halts_30s():
