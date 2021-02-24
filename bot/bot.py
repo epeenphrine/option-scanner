@@ -35,7 +35,7 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
     print(arg) # <--- tuple. access tuple like a list/array 
     if arg:
         roles = ctx.guild.roles # <--- get server roles
-        author_role = ctx﻿.author.roles # <-- all message author roles
+        author_role = ctx.author.roles # <-- all message author roles
         if len(arg) == 4:
             print('got custom arguments')
             message = ""
