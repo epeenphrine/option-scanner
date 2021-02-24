@@ -41,7 +41,6 @@ def get_tweet_urls():
         'lingeriefc',
         'Trade_The_News',
         'realwillmeade',
-        ';'
     ]
     try:
         print('opening json')
