@@ -252,16 +252,17 @@ async def get_tweets_5s():
     new_tweet_urls = get_tweet_urls()
     print(new_tweet_urls)
     messages = []
-    for url in new_tweet_urls:
-        message = await main_chat.send(url)
-        await tweets_chat.send(url)
-        messages.append(message)
-    if messages: 
-        print('awaiting 55s')
-        await asyncio.sleep(60)
-        for message in messages:
-            print(f'deleting : {message}')
-            await discord.Message.delete(message)
+    if tweets_chat:
+        for url in new_tweet_urls:
+            message = await main_chat.send(url)
+            await tweets_chat.send(url)
+            messages.append(message)
+        if messages: 
+            print('awaiting 55s')
+            await asyncio.sleep(60)
+            for message in messages:
+                print(f'deleting : {message}')
+                await discord.Message.delete(message)
     else:
         print('no message skiping await')
 
