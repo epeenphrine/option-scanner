@@ -267,12 +267,17 @@ async def get_tweets_15s():
 async def remove_messages_1s():
     print('in remove message')
     if messages:
-        print('found messages sleeping 120s')
-        await asyncio.sleep(120)
-        for message in messages:
-            print(f'deleting : {message}')
-            await discord.Message.delete(message)
-            messages.remove(message)
+        try:
+            print('found messages sleeping 120s')
+            await asyncio.sleep(120)
+            for message in messages:
+                print(f'deleting : {message}')
+                await discord.Message.delete(message)
+                messages.remove(message)
+        except:
+            print('broke in remove__messages')
+    else:
+        print('no messages')
 
 @tasks.loop(seconds=1)
 async def get_halts_1s():
