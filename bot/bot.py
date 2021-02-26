@@ -242,7 +242,7 @@ async def earnings(ctx,*arg):
 #         print('custom commands conditions met')
 #         ticker = arg[1]
          
-@tasks.loop(seconds=5)
+@tasks.loop(seconds=3)
 async def get_tweets_5s():
     main_chat_id = 492405515931090966 
     tweets_chat_id = 801541146668564521
