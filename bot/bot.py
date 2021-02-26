@@ -260,11 +260,11 @@ async def get_tweets_30s():
             message = await main_chat.send(url)
             await tweets_chat.send(url)
             messages.append(message)
-        if messages: 
-            print('awaiting 120')
-            await asyncio.sleep(120)
-            for message in messages:
-                print(f'deleting : {message}')
+    if messages: 
+        print('awaiting 120')
+        await asyncio.sleep(120)
+        for message in messages:
+            print(f'deleting : {message}')
     else:
         print('no message skiping await')
 
