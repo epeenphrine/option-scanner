@@ -288,7 +288,6 @@ async def get_halts_1s():
     halt_chat = client.get_channel(halt_chat_id)
     new_halts = get_halts()
     print(new_halts)
-    messages = []
     for halt in new_halts:
         if halt['haltTime'] and halt['resumptionTime'] == None:
             halt_message = '**HALTED** \n'
