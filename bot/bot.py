@@ -253,7 +253,7 @@ async def get_tweets_5s():
         new_tweet_urls = get_tweet_urls()
         print(new_tweet_urls)
         messages = []
-        if tweets_chat:
+        if new_tweet_urls:
             for url in new_tweet_urls:
                 message = await main_chat.send(url)
                 await tweets_chat.send(url)
