@@ -242,7 +242,7 @@ async def earnings(ctx,*arg):
 #         print('custom commands conditions met')
 #         ticker = arg[1]
          
-@tasks.loop(seconds=30)
+@tasks.loop(seconds=5)
 async def get_tweets_5s():
     main_chat_id = 492405515931090966 
     tweets_chat_id = 801541146668564521
@@ -262,11 +262,10 @@ async def get_tweets_5s():
             await asyncio.sleep(60)
             for message in messages:
                 print(f'deleting : {message}')
-                await discord.Message.delete(message)
     else:
         print('no message skiping await')
 
-@tasks.loop(seconds=30)
+@tasks.loop(seconds=5)
 async def get_halts_5s():
     main_chat_id = 492405515931090966 
     halt_chat_id = 808544039850344488 
