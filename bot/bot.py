@@ -267,7 +267,7 @@ async def get_tweets_60s():
     else:
         print('no message skiping await')
 
-@tasks.loop(seconds=1)
+@tasks.loop(seconds=30)
 async def get_halts_1s():
     main_chat_id = 492405515931090966 
     halt_chat_id = 808544039850344488 
@@ -292,7 +292,7 @@ async def get_halts_1s():
         messages.append(message)
     if messages:
         print('awaiting 60')
-        await asyncio.sleep(60)
+        await asyncio.sleep(25)
         for message in messages:
             print(f'deleting : {message}')
             await discord.Message.delete(message)
