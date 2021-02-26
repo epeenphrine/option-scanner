@@ -244,26 +244,29 @@ async def earnings(ctx,*arg):
          
 @tasks.loop(seconds=3)
 async def get_tweets_5s():
-    main_chat_id = 492405515931090966 
-    tweets_chat_id = 801541146668564521
-    print('in get_tweets_5s')
-    main_chat = client.get_channel(main_chat_id)
-    tweets_chat = client.get_channel(tweets_chat_id)
-    new_tweet_urls = get_tweet_urls()
-    print(new_tweet_urls)
-    messages = []
-    if tweets_chat:
-        for url in new_tweet_urls:
-            message = await main_chat.send(url)
-            await tweets_chat.send(url)
-            messages.append(message)
-        if messages: 
-            print('awaiting 60')
-            await asyncio.sleep(60)
-            for message in messages:
-                print(f'deleting : {message}')
-    else:
-        print('no message skiping await')
+    try:
+        main_chat_id = 492405515931090966 
+        tweets_chat_id = 801541146668564521
+        print('in get_tweets_5s')
+        main_chat = client.get_channel(main_chat_id)
+        tweets_chat = client.get_channel(tweets_chat_id)
+        new_tweet_urls = get_tweet_urls()
+        print(new_tweet_urls)
+        messages = []
+        if tweets_chat:
+            for url in new_tweet_urls:
+                message = await main_chat.send(url)
+                await tweets_chat.send(url)
+                messages.append(message)
+            if messages: 
+                print('awaiting 60')
+                await asyncio.sleep(60)
+                for message in messages:
+                    print(f'deleting : {message}')
+        else:
+            print('no message skiping await')
+    except:
+        print('get_tweets_5s broke')
 
 @tasks.loop(seconds=5)
 async def get_halts_5s():
