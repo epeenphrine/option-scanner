@@ -55,14 +55,13 @@ def get_tweet_urls():
 
     ]
     for handle in handles:
-        try:
-            handle_recent = api.user_timeline(handle, count=1)[0]
-            tweet_url = f'https://twitter.com/{handle}/statuses/{handle_recent.id}'
-            if tweet_url not in tweet_urls:
-                tweet_urls.append(tweet_url)
-                new_tweets.append(tweet_url)
-        except:
-            print('broke in tweetsp.py in handle')
+        handle_recent = api.user_timeline(handle, count=1)
+        if handle_recent:
+            handle_recent = handle_recent[0]
+        tweet_url = f'https://twitter.com/{handle}/statuses/{handle_recent.id}'
+        if tweet_url not in tweet_urls:
+            tweet_urls.append(tweet_url)
+            new_tweets.append(tweet_url)
     with open('/tmp/json/tweets.json','w') as f:
         json.dump(tweet_urls, f)
     return new_tweets 
