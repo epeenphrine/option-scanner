@@ -242,11 +242,11 @@ async def earnings(ctx,*arg):
 #         print('custom commands conditions met')
 #         ticker = arg[1]
          
-@tasks.loop(seconds=15)
-async def get_tweets_15s():
+@tasks.loop(seconds=60)
+async def get_tweets_60s():
     main_chat_id = 492405515931090966 
     tweets_chat_id = 801541146668564521
-    print('in get_tweets_15s')
+    print('in get_tweets_60s')
     main_chat = client.get_channel(main_chat_id)
     try:
         tweets_chat = client.get_channel(tweets_chat_id)
@@ -262,7 +262,7 @@ async def get_tweets_15s():
             messages.append(message)
     if messages: 
         print('awaiting 60')
-        await asyncio.sleep(60)
+        await asyncio.sleep(55)
         for message in messages:
             print(f'deleting : {message}')
     else:
@@ -298,7 +298,7 @@ async def get_halts_1s():
             print(f'deleting : {message}')
             await discord.Message.delete(message)
 
-@get_tweets_15s.before_loop
+@get_tweets_60s.before_loop
 async def before():
     await client.wait_until_ready()
     print("Finished waiting")
@@ -307,6 +307,6 @@ async def before():
 async def before():
     await client.wait_until_ready()
     print('finished awaiting')
-get_tweets_15s.start()
+get_tweets_60s.start()
 get_halts_1s.start()
 client.run(prod)
