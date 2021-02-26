@@ -243,10 +243,10 @@ async def earnings(ctx,*arg):
 #         ticker = arg[1]
          
 @tasks.loop(seconds=15)
-async def get_tweets_30s():
+async def get_tweets_15s():
     main_chat_id = 492405515931090966 
     tweets_chat_id = 801541146668564521
-    print('in get_tweets_30s')
+    print('in get_tweets_15s')
     main_chat = client.get_channel(main_chat_id)
     try:
         tweets_chat = client.get_channel(tweets_chat_id)
@@ -261,18 +261,18 @@ async def get_tweets_30s():
             await tweets_chat.send(url)
             messages.append(message)
     if messages: 
-        print('awaiting 120')
-        await asyncio.sleep(120)
+        print('awaiting 60')
+        await asyncio.sleep(60)
         for message in messages:
             print(f'deleting : {message}')
     else:
         print('no message skiping await')
 
 @tasks.loop(seconds=1)
-async def get_halts_5s():
+async def get_halts_1s():
     main_chat_id = 492405515931090966 
     halt_chat_id = 808544039850344488 
-    print('in get_halts_5s')
+    print('in get_halts_1s')
     main_chat = client.get_channel(main_chat_id)
     halt_chat = client.get_channel(halt_chat_id)
     new_halts = get_halts()
@@ -298,15 +298,15 @@ async def get_halts_5s():
             print(f'deleting : {message}')
             await discord.Message.delete(message)
 
-@get_tweets_30s.before_loop
+@get_tweets_15s.before_loop
 async def before():
     await client.wait_until_ready()
     print("Finished waiting")
 
-@get_halts_5s.before_loop
+@get_halts_1s.before_loop
 async def before():
     await client.wait_until_ready()
     print('finished awaiting')
-get_tweets_30s.start()
-get_halts_5s.start()
+get_tweets_15s.start()
+get_halts_1s.start()
 client.run(prod)
