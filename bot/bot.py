@@ -258,8 +258,8 @@ async def get_tweets_5s():
             await tweets_chat.send(url)
             messages.append(message)
         if messages: 
-            print('awaiting 120s')
-            await asyncio.sleep(120)
+            print('awaiting 60')
+            await asyncio.sleep(60)
             for message in messages:
                 print(f'deleting : {message}')
     else:
@@ -289,8 +289,8 @@ async def get_halts_5s():
         # await tweets_chat.send(url)
         messages.append(message)
     if messages:
-        print('awaiting 120')
-        await asyncio.sleep(120)
+        print('awaiting 60')
+        await asyncio.sleep(60)
         for message in messages:
             print(f'deleting : {message}')
             await discord.Message.delete(message)
