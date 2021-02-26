@@ -268,7 +268,7 @@ async def get_tweets_5s():
     else:
         print('no message skiping await')
 
-@tasks.loop(seconds=5)
+@tasks.loop(seconds=1)
 async def get_halts_5s():
     main_chat_id = 492405515931090966 
     halt_chat_id = 808544039850344488 
