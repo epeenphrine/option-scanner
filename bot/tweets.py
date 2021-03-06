@@ -37,7 +37,8 @@ def get_tweet_urls():
         'jimcramer',
         'PeterSchiff',
         'hoodietrades',
-        'nope_its_lily'
+        'nope_its_lily',
+        'alpharivelino',
     ]
     try:
         print('opening json')
