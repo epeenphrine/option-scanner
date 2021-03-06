@@ -31,12 +31,13 @@ def get_tweet_urls():
         'pakpakchicken',
         'cnbcnow',
         'Trinhnomics',
-        'WallStJesus',
         'firstsquawk',
         'Trade_The_News',
         'realwillmeade',
         'jimcramer',
-        'PeterSchiff'
+        'PeterSchiff',
+        'hoodietrades',
+        'nope_its_lily'
     ]
     try:
         print('opening json')
