@@ -27,10 +27,11 @@ def get_earnings():
             if d.weekday() == 4:
                 dates_list.append(str(d))
         #print(dates_list[-2])
-        return dates_list[0]
+        return dates_list[-1]
 
 
-    front_date = get_front_date(date_delta)
+    front_date = get_front_date(15)
+    print(front_date)
 
     # ========= check earnings calendar ==========
     date_from = datetime.datetime.strptime(date.today().strftime('%Y-%m-%d') + " 05:00:00",  '%Y-%m-%d %X')
@@ -49,4 +50,6 @@ def get_earnings():
             json.dump(earnings_list, f)
     print('earnings date script finished !')
     print('check /tmp/json/ for earnings_date')
-get_earnings()
+if __name__ == '__main__':
+    get_earnings()
+    print('script finished')
