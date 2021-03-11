@@ -30,26 +30,50 @@ const columns = [
 	},
 	{
 		name: 'Dates',
-		selector: 'dates'
+		 selector: 'dates'
 	}
 ];
-
+function checkEarnings(ticker, earnings) {
+	let newTicker = ticker 
+	let foundTickers = []
+	earnings.forEach( earning => {
+		if (earning.ticker == ticker) {
+			console.log(earning.ticker)
+			console.log('found earnings')
+			newTicker = `${earning.ticker} (ER: ${earning.date})` 
+			foundTickers.push(ticker)
+			console.log(newTicker)
+		} 
+	})	
+	return newTicker
+}
 export default function Table2(props) {
 	const data = props.api;
-	console.log(data);
 
 	const api = props.api;
+	const earnings = props.earnings
+	console.log(data)
+	console.log(earnings)
 	let rows;
 	if (Array.isArray(api)) {
-		rows = api.map((row) => ({
-			ticker: row.ticker,
+		rows = api.map((row) => (
+		{
+			ticker: checkEarnings(row.ticker, earnings),
 			underlyingPrice: row.underlyingPrice,
 			dates: row.dates.join(' / \t'),
 			strikes: row.strikes.join(' / \t'),
 			goldenRatio: row.goldenRatio.join(' / \t'),
 			prices: row.prices.join(' / \t')
 		}));
+
 	}
+	// let test;
+	// if (Array.isArray(earnings)) {
+	// 	data.forEach(row => {
+	// 		checkEarnings(row.ticker, earnings)
+	// 	})
+
+	// }
 	console.log(rows);
 	return (
 		<React.Fragment>

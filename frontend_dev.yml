@@ -1,0 +1,13 @@
+version: '2'
+services:
+  ##web app
+  frontend:
+    container_name: frontend 
+    image: "frontend"
+    build:
+      context: frontend 
+      dockerfile: dev.Dockerfile
+    ports:
+      - 3000:3000
+    volumes: 
+      - ./frontend:/app
