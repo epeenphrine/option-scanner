@@ -81,12 +81,12 @@ def earningsThisWeek():
             jsonObject = json.load(f)
         return jsonify(jsonObject)
 
-@app.route('/earnings')
-def earningsThisWeek():
-    if request.method =="GET":
-        with open('/tmp/json/companies_earnings.json') as f:
-            jsonObject = json.load(f)
-        return jsonify(jsonObject)
+# @app.route('/earnings')
+# def earningsThisWeek():
+#     if request.method =="GET":
+#         with open('/tmp/json/companies_earnings.json') as f:
+#             jsonObject = json.load(f)
+#         return jsonify(jsonObject)
 
 @app.route('/ipo/thisWeek', methods=['GET'])
 def ipoThisWeek():
