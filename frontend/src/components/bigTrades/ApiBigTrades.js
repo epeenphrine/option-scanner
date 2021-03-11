@@ -7,12 +7,17 @@ export default function ApiBigTrades() {
 	const [ volume, setVolume ] = useState(500);
 	const [ oi, setOi ] = useState(1000);
 	const [ table, setTable ] = useState('react-table');
+	const [earnings, setEarnings] = useState([])
 
 	// call api on page load
 	useEffect(async () => {
 		const res = await fetch('https://api.neetcode.com/bigTrades');
 		const data = await res.json();
+
+		const res2 = await fetch('https://api.neetcode.com/earningsThisWeek')
+		const earningss = await res2.json()
 		setApi(data);
+		setEarnings(earningss)
 	}, []);
 
 	// call api using function based on events
@@ -28,7 +33,7 @@ export default function ApiBigTrades() {
     return (
         <React.Fragment>
 			<About />
-            <Table api={api} />
+            <Table api={api} earnings = {earnings}/>
         </React.Fragment>
     )
 }

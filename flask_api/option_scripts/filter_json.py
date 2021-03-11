@@ -192,6 +192,7 @@ def get_big_trades(**data):
             option_exp_dates = option['callExpDateMap'].keys()
 
             option_dict['ticker'] = ticker
+            option_dict['underlying_price'] = underlying_price
             option_dict['strikes'] = []
             option_dict['prices'] = []
             option_dict['volume_oi_ratio'] = []

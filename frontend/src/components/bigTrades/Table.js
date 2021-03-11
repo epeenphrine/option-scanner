@@ -27,15 +27,28 @@ const columns = [
 		selector: 'exp_dates'
 	}
 ];
+function checkEarnings(ticker, earnings) {
+	let newTicker = ticker 
+	let foundTickers = []
+	earnings.forEach( earning => {
+		if (earning.ticker == ticker) {
+			console.log(earning.ticker)
+			console.log('found earnings')
+			newTicker = `${earning.ticker} (ER: ${earning.date})` 
+			foundTickers.push(ticker)
+		} 
+	})	
+	return newTicker
+}
 export default function Table(props) {
 	const data = props.api;
 	console.log(data);
-
+	
 	const api = props.api;
 	let rows;
 	if (Array.isArray(api)) {
 		rows = api.map((row) => ({
-			ticker: row.ticker,
+			ticker: checkEarnings(row.ticker, props.earnings),
 			exp_dates: row.exp_dates.join(' / \t'),
 			strikes: row.strikes.join(' / \t'),
 			volume_oi_ratio: row.volume_oi_ratio.join(' / \t'),
