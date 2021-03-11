@@ -8,6 +8,15 @@ const columns = [
 		sortable: true
 	},
 	{
+		name: 'Underlying Price', 
+		selector: 'underlying_price'
+	},
+	{
+		name: 'Prices',
+		selector: 'prices',
+		sortable: true
+	},
+	{
 		name: 'Volume Oi Ratio',
 		selector: 'volume_oi_ratio',
 		sortable: true
@@ -18,14 +27,9 @@ const columns = [
 		sortable: true
 	},
 	{
-		name: 'Prices',
-		selector: 'prices',
-		sortable: true
-	},
-	{
 		name: 'Exp Dates',
 		selector: 'exp_dates'
-	}
+	},
 ];
 function checkEarnings(ticker, earnings) {
 	let newTicker = ticker 
@@ -52,7 +56,8 @@ export default function Table(props) {
 			exp_dates: row.exp_dates.join(' / \t'),
 			strikes: row.strikes.join(' / \t'),
 			volume_oi_ratio: row.volume_oi_ratio.join(' / \t'),
-			prices: row.prices.join(' / \t')
+			prices: row.prices.join(' / \t'),
+			underlying_price: row.underlying_price
 		}));
 	}
 	console.log(rows);
