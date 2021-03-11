@@ -64,11 +64,10 @@ async def calliebot(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
             res2 = requests.get(f"https://api.neetcode.com/earningsThisWeek").json()
             earnings_ticker = [company['ticker'] for company in res2]
             print(arg[0])
-            print(res)
             for company in res:
                 if company['ticker'] in earnings_ticker:
-                    earnings_date = [date['date'] for date in earnings_ticker if company['ticker'] in earnings_ticker]
-                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} / **ER {earnings_date[0]}**\n "
+                    earnings_date = [date['date'] for date in res2 if date['ticker'] == company['ticker']]
+                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} / **ER {earnings_date}**\n "
                 else:
                     message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']}\n"
             #message_ = await ctx.send(f'`callies within 14 days | {message2} | scanned EST {scan_time_json} `')
@@ -113,7 +112,8 @@ async def bigtrades(ctx, *arg): # <--- *arg stores arguments as tuples. Check pr
         print(res)
         for company in res:
             if company['ticker'] in earnings_ticker:
-                message += f"{company['ticker']} / `{company['strikes']}` / {company['exp_dates']} **ER**\n"
+                earnings_date = [date['date'] for date in res2 if date['ticker'] == company['ticker']]
+                message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} / **ER {earnings_date}**\n "
             else:
                 message += f"{company['ticker']} / `{company['strikes']}` / {company['exp_dates']}\n"
         #message_ = await ctx.send(f'`callies within 14 days | {message2} | scanned EST {scan_time_json} `')
@@ -160,7 +160,8 @@ async def calliebott(ctx, *arg): # <--- *arg stores arguments as tuples. Check p
             print(res)
             for company in res:
                 if company['ticker'] in earnings_ticker:
-                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} **ER**\n"
+                    earnings_date = [date['date'] for date in res2 if date['ticker'] == company['ticker']]
+                    message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']} / **ER {earnings_date}**\n "
                 else:
                     message += f"{company['ticker']} / `{company['strikes']}` / {company['dates']}\n"
             #message_ = await ctx.send(f'`callies within 14 days | {message2} | scanned EST {scan_time_json} `')
@@ -170,6 +171,7 @@ async def calliebott(ctx, *arg): # <--- *arg stores arguments as tuples. Check p
             await discord.Message.delete(message_2)
         else:
             pass
+
 @client.command()
 async def ipo(ctx, *arg): # <--- *arg stores arguments as tuples. Check print statements to see how it works
     if arg:
