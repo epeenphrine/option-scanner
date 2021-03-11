@@ -42,7 +42,6 @@ function checkEarnings(ticker, earnings) {
 			console.log('found earnings')
 			newTicker = `${earning.ticker} (ER: ${earning.date})` 
 			foundTickers.push(ticker)
-			console.log(newTicker)
 		} 
 	})	
 	return newTicker
