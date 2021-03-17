@@ -247,11 +247,11 @@ async def earnings(ctx,*arg):
 
 messages = [] 
 
-@tasks.loop(seconds=15)
-async def get_tweets_15s():
+@tasks.loop(seconds=30)
+async def get_tweets_30s():
     main_chat_id = 492405515931090966 
     tweets_chat_id = 801541146668564521
-    print('in get_tweets_15s')
+    print('in get_tweets_30s')
     main_chat = client.get_channel(main_chat_id)
     try:
         tweets_chat = client.get_channel(tweets_chat_id)
@@ -305,7 +305,7 @@ async def get_halts_1s():
         # await tweets_chat.send(url)
         messages.append(message)
 
-@get_tweets_15s.before_loop
+@get_tweets_30s.before_loop
 async def before():
     await client.wait_until_ready()
     print("Finished waiting")
@@ -319,7 +319,7 @@ async def before():
     await client.wait_until_ready()
     print('remove messages finished waiting')
 
-get_tweets_15s.start()
+get_tweets_30s.start()
 remove_messages_1s.start()
 get_halts_1s.start()
 
