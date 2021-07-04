@@ -7,7 +7,11 @@ services:
       context: bot
       dockerfile: Dockerfile
     volumes:
-      - /tmp/json:/tmp/json 
+      - /tmp/json:/tmp/json
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+      
     restart: unless-stopped
 
   flask_api: 
@@ -20,6 +24,9 @@ services:
       - 5000:5000
     volumes: 
       - /tmp/json:/tmp/json ## memory to save wear
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
     restart: unless-stopped
 
   tda_script: 
@@ -31,6 +38,9 @@ services:
     volumes: 
       - /tmp/json:/tmp/json ## memory to save wear
       - /tmp/data:/tmp/data
+      
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   6h_scripts:
     container_name: 6h_scripts 
@@ -40,6 +50,8 @@ services:
       dockerfile: 6h_scripts.Dockerfile
     volumes:
       - /tmp/json:/tmp/json 
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
 
   get_earnings_script:
     container_name: get_earnings_script
@@ -49,6 +61,10 @@ services:
       dockerfile: get_earnings_script.Dockerfile
     volumes:
       - /tmp/json:/tmp/json  
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+
+
 
   myfxbook_script:
     container_name: myfxbook_script
@@ -56,3 +72,6 @@ services:
     build:
       context: bot
       dockerfile: myfxbook_script.Dockerfile
+    volumes:
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"

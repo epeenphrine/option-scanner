@@ -15,6 +15,7 @@ def get_nasdaq_list():
         nasdaq_listings =  json.load(f)
     tickers = [company['symbol'] for company in nasdaq_listings]
     tickers_filter = [ticker for ticker in tickers if ticker in options_list]
+    print('hello')
     return tickers_filter
 
 def get_short_list():
@@ -28,3 +29,6 @@ def get_short_list():
     tickers = [company['symbol'] for company in nasdaq_listings]
     tickers_filter = [ticker for ticker in tickers if ticker in options_list]
     return tickers_filter
+
+if __name__ == "__main__":
+    print(get_nasdaq_list())
